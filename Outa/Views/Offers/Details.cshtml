@@ -1,0 +1,63 @@
+﻿@model Outa.Models.Offer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Offer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Content)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.o_AuthorUn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_AuthorUn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Parent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Parent)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.Identity.Name == Model.o_AuthorUn || User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.Raw("|")
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        @Html.Raw("|")
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

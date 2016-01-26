@@ -11,11 +11,16 @@ namespace Outa.Models
     {
         [DatabaseGenerated((DatabaseGeneratedOption.Identity))]
         public int Id { get; set; }
+        [StringLength(36)]
+        public string Title { get; set; }
 
         public string Content { get; set; }
 
         [StringLength(128)]
         public string Author { get; set; }
+        [StringLength(256)]
+        public string AuthorUn { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
         public string Tags { get; set; }

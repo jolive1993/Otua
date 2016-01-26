@@ -172,22 +172,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OffersController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601252235452_InitialCreate.cs" />
-    <Compile Include="Migrations\201601252235452_InitialCreate.Designer.cs">
-      <DependentUpon>201601252235452_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601261946157_InitialCreate.cs" />
+    <Compile Include="Migrations\201601261946157_InitialCreate.Designer.cs">
+      <DependentUpon>201601261946157_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601260000227_Id.cs" />
-    <Compile Include="Migrations\201601260000227_Id.Designer.cs">
-      <DependentUpon>201601260000227_Id.cs</DependentUpon>
+    <Compile Include="Migrations\201601262006139_Request.cs" />
+    <Compile Include="Migrations\201601262006139_Request.Designer.cs">
+      <DependentUpon>201601262006139_Request.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Offer.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -253,6 +255,14 @@
     <Content Include="Views\Requests\Details.cshtml" />
     <Content Include="Views\Requests\Edit.cshtml" />
     <Content Include="Views\Requests\Index.cshtml" />
+    <Content Include="Views\Requests\MyRequests.cshtml" />
+    <Content Include="Views\Offers\Create.cshtml" />
+    <Content Include="Views\Offers\Delete.cshtml" />
+    <Content Include="Views\Offers\Details.cshtml" />
+    <Content Include="Views\Offers\Edit.cshtml" />
+    <Content Include="Views\Offers\Index.cshtml" />
+    <Content Include="Views\Offers\IndexByParent.cshtml" />
+    <Content Include="Views\Offers\MyOffers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -266,11 +276,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601252235452_InitialCreate.resx">
-      <DependentUpon>201601252235452_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601261946157_InitialCreate.resx">
+      <DependentUpon>201601261946157_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601260000227_Id.resx">
-      <DependentUpon>201601260000227_Id.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601262006139_Request.resx">
+      <DependentUpon>201601262006139_Request.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

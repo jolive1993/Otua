@@ -8,6 +8,33 @@ namespace Outa.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Offer",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        o_Content = c.String(),
+                        o_Author = c.String(maxLength: 128),
+                        o_AuthorUn = c.String(maxLength: 256),
+                        o_Date = c.DateTime(nullable: false),
+                        o_Price = c.Decimal(precision: 18, scale: 2),
+                        o_Parent = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Request",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Content = c.String(),
+                        Author = c.String(maxLength: 128),
+                        AuthorUn = c.String(maxLength: 256),
+                        Date = c.DateTime(nullable: false),
+                        Tags = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -94,6 +121,8 @@ namespace Outa.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Request");
+            DropTable("dbo.Offer");
         }
     }
 }

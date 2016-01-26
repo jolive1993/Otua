@@ -1,0 +1,72 @@
+﻿@model Outa.Models.Offer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Offer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_AuthorUn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_AuthorUn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o_Parent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o_Parent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

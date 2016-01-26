@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Outa.Models.Offer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+        @Html.DisplayNameFor(model => model.o_AuthorUn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Parent)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.o_AuthorUn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.o_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.o_Price)
+            </td>
+            <td>
+                @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
+            </td>
+            <td>
+                @if (User.Identity.Name == item.o_AuthorUn || User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.Raw("|")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.Raw("|")
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -13,7 +13,7 @@ namespace Outa.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201601252235452_InitialCreate"; }
+            get { return "201601261946157_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
