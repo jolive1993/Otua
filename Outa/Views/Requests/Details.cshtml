@@ -4,41 +4,35 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Request</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorUn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorUn)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tags)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tags)
-        </dd>
-
-    </dl>
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+<div class="row">
+    <div class="col-md-8">
+        <img src="@Html.DisplayFor(model => model.Img)" />
+    </div>
+    <div class="col-md-4">
+        <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
+        <p>@Html.ActionLink("Ask Question", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p class="detailsContent">@Html.DisplayFor(model => model.Content)</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p class="detailsOtherH">User</p>
+        <p class="detailsOther">@Html.DisplayFor(model => model.AuthorUn)</p>
+    </div>
+    <div class="col-md-6">
+        <p class="detailsOtherH">Last Modified</p>
+        <p class="detailsOther">@Html.DisplayFor(model => model.Date)</p>
+    </div>
+</div>
+<div class="row" id="backbutton">
+    <div class="col-md-12">
+        @Html.ActionLink("Back", "GridIndex", null, new { @class = "btn btn-primary btn-large", @style = "width:100%" })
+    </div>
 </div>
 <p>
     @if (User.Identity.Name == Model.AuthorUn || User.IsInRole("admin"))
@@ -48,5 +42,4 @@
         @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
         @Html.Raw("|")
     }
-    @Html.ActionLink("Back to List", "Index")
 </p>

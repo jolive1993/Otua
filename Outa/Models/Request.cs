@@ -24,5 +24,7 @@ namespace Outa.Models
 
         [Required]
         public string Tags { get; set; }
+        public int Status { get; set; }
+        public string Img { get; set; }
     }
 }

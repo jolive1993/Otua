@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.o_Price)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.o_Status)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.o_Parent)
         </th>
     </tr>
@@ -36,6 +39,16 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.o_Price)
+            </td>
+            <td>
+                @if (item.o_Status == 0)
+                {
+                    @Html.Raw("Open")
+                }
+                else if (item.o_Status == 1)
+                {
+                    @Html.Raw("Accepted Offer")
+                }
             </td>
             <td>
                 @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)

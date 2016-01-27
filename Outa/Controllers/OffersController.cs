@@ -18,7 +18,8 @@ namespace Outa.Controllers
         // GET: Offers
         public ActionResult Index()
         {
-            return View(db.Offers.ToList());
+            var list = db.Offers.Where(model => model.o_Status == 0).ToList();
+            return View(list);
         }
         public ActionResult IndexByParent(int id)
         {
@@ -69,7 +70,7 @@ namespace Outa.Controllers
                 offer.o_Parent = (int)TempData["parent"];
                 db.Offers.Add(offer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyOffers");
             }
 
             return View(offer);
@@ -89,6 +90,29 @@ namespace Outa.Controllers
             }
             return View(offer);
         }
+        public ActionResult Accept(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Offer offer = db.Offers.Find(id);
+            if (offer == null)
+            {
+                return HttpNotFound();
+            }
+            var request = db.Requests.Find(offer.o_Parent);
+            if (request.Author == User.Identity.GetUserId())
+            {
+                request.Status = 1;
+                offer.o_Status = 1;
+                db.Entry(offer).State = EntityState.Modified;
+                db.Entry(request).State = EntityState.Modified;
+                db.SaveChanges();
+                return View(offer);
+            }
+            return HttpNotFound();
+        }
 
         // POST: Offers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -99,9 +123,12 @@ namespace Outa.Controllers
         {
             if (ModelState.IsValid)
             {
+                offer.o_AuthorUn = User.Identity.GetUserName();
+                offer.o_Author = User.Identity.GetUserId();
+                offer.o_Date = DateTime.Now;
                 db.Entry(offer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyOffers");
             }
             return View(offer);
         }
@@ -129,7 +156,7 @@ namespace Outa.Controllers
             Offer offer = db.Offers.Find(id);
             db.Offers.Remove(offer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyOffers");
         }
 
         protected override void Dispose(bool disposing)

@@ -18,7 +18,13 @@ namespace Outa.Controllers
         // GET: Requests
         public ActionResult Index()
         {
-            return View(db.Requests.ToList());
+            var list = db.Requests.Where(model => model.Status == 0).ToList();
+            return View(list);
+        }
+        public ActionResult GridIndex()
+        {
+            var list = db.Requests.Where(model => model.Status == 0).ToList();
+            return View(list);
         }
         public ActionResult MyRequests()
         {
@@ -54,7 +60,7 @@ namespace Outa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Content,Tags,Title")] Request request)
+        public ActionResult Create([Bind(Include = "Content,Tags,Title,Img")] Request request)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +69,7 @@ namespace Outa.Controllers
                 request.Author = User.Identity.GetUserId();
                 db.Requests.Add(request);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("GridIndex");
             }
 
             return View(request);
@@ -99,7 +105,7 @@ namespace Outa.Controllers
                 request.Date = DateTime.Now;
                 db.Entry(request).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("GridIndex");
             }
             return View(request);
         }
@@ -127,7 +133,7 @@ namespace Outa.Controllers
             Request request = db.Requests.Find(id);
             db.Requests.Remove(request);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("GridIndex");
         }
 
         protected override void Dispose(bool disposing)

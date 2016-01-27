@@ -20,10 +20,46 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 10000px;
 }
 #indexjumbo
 {
     text-align:center;
     justify-content:center;
+}
+.requesttable{
+    height: auto;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    border: 1px solid black;
+}
+.requestcontent{
+    font-size: 18px;
+    color:darkred
+}
+.topbutton{
+    padding-bottom:20px;
+}
+.detailsContent{
+    font-size:large;
+    text-align:center;
+    padding-top:50px;
+}
+.detailsOther
+{
+    font-size:large;
+    text-align:center;
+    padding-top:0px;
+}
+.detailsOtherH
+{
+    color:red;
+    font-size:large;
+    text-align:center;
+    padding-top:0px;
+}
+#backbutton{
+    padding-top:50px;
+    text-align:center;
 }
