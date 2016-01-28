@@ -230,6 +230,8 @@
     <Content Include="Content\img\8.jpg" />
     <Content Include="Content\img\9.png" />
     <Content Include="Content\leaflet-routing-machine.css" />
+    <Content Include="Content\remodal-default-theme.css" />
+    <Content Include="Content\remodal.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -253,6 +255,7 @@
     <Content Include="Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr.custom.js" />
+    <Content Include="Scripts\remodal.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />

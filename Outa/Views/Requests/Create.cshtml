@@ -4,10 +4,13 @@
     ViewBag.Title = "Create";
 }
 <head>
+    <link rel="stylesheet" href="~/Content/remodal.css">
+    <link rel="stylesheet" href="~/Content/remodal-default-theme.css">
     <link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="~/Scripts/sweetalert.min.js"></script>
+    <script src="~/Scripts/remodal.min.js"></script>
 </head>
 <h2>Create</h2>
 
@@ -77,8 +80,9 @@
         <div class="form-group">
             <a type="button"
                class="btn btn-primary"
-               href="#address-editor"
-               data-toggle="modal">Location</a>
+               href="#modal">
+                Location
+               </a>
             <p style="font-size:24px; font-style:italic; padding-top:10px; padding-bottom:10px">or</p>
             <input type="button" value="Use Current Location" style="width:auto" class="btn btn-default" onclick="geoLocation();" />
         </div>
@@ -89,11 +93,10 @@
         </div>
     </div>
 }
-<div class="modal fade" id="address-editor" style="width:30%; margin-left:auto; margin-right:auto; margin-top:auto; margin-bottom:auto; background-color:#FFFFFF">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-    </div>
-    <div class="modal-body" style="color:black; text-align:center">
+<div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <h1>Address</h1>
+    <p>
         <div class="form-horizontal" style="text-align:center">
             <div class="form-group">
                 <div class="row" style="padding:15px">
@@ -135,12 +138,11 @@
                     <input type="text" class="form-control" id="zipcode" />
                 </div>
             </div>
-            </div>
         </div>
-    <div class="modal-footer" style="text-align:center">
-        <a href="#" class="btn btn-primary" onclick="byAdress();">Save Changes</a>
-        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-    </div>
+    </p>
+    <br>
+    <button data-remodal-action="confirm" class="btn btn-primary"onclick="byAdress();">OK</button>
+    <button data-remodal-action="cancel" class="btn btn-default">Cancel</button>
 </div>
 <script>
     function byAdress()
@@ -164,7 +166,7 @@
             $("#latter").val(latitude);
             $("#longer").val(longitude);
             swal({
-                title: "Location Set:",
+                title: "Location Set!",
                 confirmButtonColor: "#D9230F"
             });
         });
