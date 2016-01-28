@@ -62,7 +62,7 @@ namespace Outa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Content,Tags,Title,Img")] Request request)
+        public ActionResult Create([Bind(Include = "Content,Tags,Title,Img,Lat,Long")] Request request)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace Outa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Content,Tags,Title")] Request request)
+        public ActionResult Edit([Bind(Include = "Id,Content,Tags,Title,Lat,Long")] Request request)
         {
             if (ModelState.IsValid)
             {

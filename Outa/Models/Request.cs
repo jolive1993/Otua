@@ -12,6 +12,7 @@ namespace Outa.Models
         [DatabaseGenerated((DatabaseGeneratedOption.Identity))]
         public int Id { get; set; }
         [StringLength(36)]
+        [Required]
         public string Title { get; set; }
 
         public string Content { get; set; }
@@ -26,5 +27,7 @@ namespace Outa.Models
         public string Tags { get; set; }
         public int Status { get; set; }
         public string Img { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
     }
 }

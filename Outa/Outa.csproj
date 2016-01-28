@@ -198,6 +198,14 @@
     <Compile Include="Migrations\201601271717173_Request1.Designer.cs">
       <DependentUpon>201601271717173_Request1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601281647578_Request2.cs" />
+    <Compile Include="Migrations\201601281647578_Request2.Designer.cs">
+      <DependentUpon>201601281647578_Request2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601281905416_Request3.cs" />
+    <Compile Include="Migrations\201601281905416_Request3.Designer.cs">
+      <DependentUpon>201601281905416_Request3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -221,6 +229,8 @@
     <Content Include="Content\img\7.jpg" />
     <Content Include="Content\img\8.jpg" />
     <Content Include="Content\img\9.png" />
+    <Content Include="Content\leaflet-routing-machine.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -239,11 +249,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\leaflet-routing-machine.js" />
     <Content Include="Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -320,6 +332,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601271717173_Request1.resx">
       <DependentUpon>201601271717173_Request1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601281647578_Request2.resx">
+      <DependentUpon>201601281647578_Request2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601281905416_Request3.resx">
+      <DependentUpon>201601281905416_Request3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
