@@ -16,16 +16,32 @@ namespace Outa.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Offers
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            var list = db.Offers.Where(model => model.o_Status == 0).ToList();
+            var list = db.Offers.ToList();
             return View(list);
         }
+        [Authorize]
         public ActionResult IndexByParent(int id)
         {
             var list = db.Offers.Where(model => model.o_Parent == id).ToList();
             return View(list);
         }
+        [Authorize]
+        public ActionResult Transactions()
+        {
+            var userid = User.Identity.GetUserId();
+            var requests = db.Requests.Where(model => model.Author == userid).ToList();
+            List<int> requestids = new List<int>();
+            foreach (Request r in requests)
+            {
+                requestids.Add(r.Id);
+            }
+            var list = db.Offers.Where(model => requestids.Contains(model.o_Parent) && model.o_Status == 1).ToList();
+            return View(list);
+        }
+        [Authorize]
         public ActionResult MyOffers()
         {
             var userid = User.Identity.GetUserId();
@@ -49,6 +65,7 @@ namespace Outa.Controllers
         }
 
         // GET: Offers/Create
+        [Authorize]
         public ActionResult Create(int id)
         {
             TempData["parent"] = id;
@@ -77,6 +94,7 @@ namespace Outa.Controllers
         }
 
         // GET: Offers/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,8 +106,17 @@ namespace Outa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(offer);
+            var user = User.Identity.GetUserId();
+            if (offer.o_Author == user)
+            {
+                return View(offer);
+            }
+            else
+            {
+                return View("Forbidden");
+            }
         }
+        [Authorize]
         public ActionResult Accept(int? id)
         {
             if (id == null)
@@ -111,7 +138,7 @@ namespace Outa.Controllers
                 db.SaveChanges();
                 return View(offer);
             }
-            return HttpNotFound();
+            return View("Forbidden");
         }
 
         // POST: Offers/Edit/5
@@ -134,6 +161,7 @@ namespace Outa.Controllers
         }
 
         // GET: Offers/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,7 +173,15 @@ namespace Outa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(offer);
+            var user = User.Identity.GetUserId();
+            if (offer.o_Author == user && offer.o_Status == 0)
+            {
+                return View(offer);
+            }
+            else
+            {
+                return View("Forbidden");
+            }
         }
 
         // POST: Offers/Delete/5

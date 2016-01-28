@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Outa.Models.Offer>
+
+@{
+    ViewBag.Title = "Transactions";
+}
+
+<h2>Transactions</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.o_AuthorUn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o_Parent)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.o_AuthorUn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.o_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.o_Price)
+            </td>
+            <td>
+                @if (item.o_Status == 1)
+                {
+                    @Html.Raw("Awaiting Payment")
+                }
+                else if (item.o_Status == 2)
+                {
+                    @Html.Raw("Payment received")
+                }
+            </td>
+            <td>
+                @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
+            </td>
+            <td>
+                @if (User.Identity.Name == item.o_AuthorUn || User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.Raw("|")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.Raw("|")
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @if (item.o_Status == 1)
+                {
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHTwYJKoZIhvcNAQcEoIIHQDCCBzwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAmRhG8Veb6jxSbwQvaJ9bYhczkMAB4RCaZZgzi58X7GXwKm/dXgUVqf5OeOv6Kpj+qP+jG/jpLekJFsQWg6EYFDnksksGoa3tAvA1g1Oh8ZnZOtObw1LzN1HTKMDids79zBu3/dp6B1ISbF8zFrID0C6p8Q2koW/70qd2MJBTJ5TELMAkGBSsOAwIaBQAwgcwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQISkPMrsBidCGAgajP9A5KcgM4zvz/uPK+2OUcLwnZVPxGDAZzSC9sh6pv0rMoEX1QS1N+ILZMSdZkCxNPHIHvEv3bCaZDxY9LXITE/Bbux2xuGTxUIP0c13QderDbG0oTamxoxCbIv/Cw0RxyjsvoxUUfM75se/a6j/DmBHy9KNTrpKYbQL75Cg52SZaeBixELZl/g5CCnaFP5wsWTCWmEJ6lKUZVTjT4Im6tQ1tVg29b77ygggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNjAxMjgxNDQzMzhaMCMGCSqGSIb3DQEJBDEWBBQucuN2GbP4YXEdoxLnEiM0CQo1fjANBgkqhkiG9w0BAQEFAASBgBe1Q2yNoWKXysUD2xYww9v17itwlBAqwReKNML6wHs1MTSMIhznnSOZB93w+kpTHgeitGG6Tm7FTbJ4Jv1PYXXjVC8dn+oen7xpkkT+579rmo8JaoL03UcgjhceqKC2WAsVwfh1ZeKV+XZA552yzE5c3p63jihmhAzS+kfzosZg-----END PKCS7-----
+">
+                        <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-small.png" alt="Buy now with PayPal" />
+                    </form>
+
+                }
+            </td>
+        </tr>
+    }
+
+</table>

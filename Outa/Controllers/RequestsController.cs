@@ -16,9 +16,10 @@ namespace Outa.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Requests
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            var list = db.Requests.Where(model => model.Status == 0).ToList();
+            var list = db.Requests.ToList();
             return View(list);
         }
         public ActionResult GridIndex()
@@ -26,6 +27,7 @@ namespace Outa.Controllers
             var list = db.Requests.Where(model => model.Status == 0).ToList();
             return View(list);
         }
+        [Authorize]
         public ActionResult MyRequests()
         {
             var userid = User.Identity.GetUserId();
@@ -88,7 +90,15 @@ namespace Outa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(request);
+            var user = User.Identity.GetUserId();
+            if (request.Author == user)
+            {
+                return View(request);
+            }
+            else
+            {
+                return View("Forbidden");
+            }
         }
 
         // POST: Requests/Edit/5
@@ -111,6 +121,7 @@ namespace Outa.Controllers
         }
 
         // GET: Requests/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,7 +133,15 @@ namespace Outa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(request);
+            var user = User.Identity.GetUserId();
+            if (request.Author == user)
+            {
+                return View(request);
+            }
+            else
+            {
+                return View("Forbidden");
+            }
         }
 
         // POST: Requests/Delete/5
