@@ -1,5 +1,5 @@
 .grid {
-	max-width: 69em;
+
 	list-style: none;
 	margin: 30px auto;
 	padding: 0;
@@ -7,10 +7,14 @@
 
 .grid li {
 	display: block;
-	float: left;
+	float: none;
 	padding: 7px;
-	width: 33%;
+    width:20%;
+    max-width: 20%;
 	opacity: 0;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .grid li.shown,
@@ -23,8 +27,10 @@
 .grid li img {
 	outline: none;
 	border: none;
-	display: block;
 	max-width: 100%;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Effect 1: opacity */

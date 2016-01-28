@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Outa.Models.Request>
 @{
     ViewBag.Title = "GridIndex";
+    Layout = "/Views/Shared/LayoutFluid.cshtml";
 }
 <html lang="en" class="no-js">
 <head>
@@ -15,19 +16,19 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/modernizr.custom.js"></script>
 </head>
-<body>
-    <div class="container">
+<body class="gridbody">
+    <div class="container-fluid">
         <header>
             <h1>Recent Requests</h1>
         </header>
-        <ul class="grid effect-1" id="grid">
+        <ul class="grid effect-2" id="grid">
 @foreach (var item in Model)
 {
             <li>
                 <a href="@Url.Action("Details", "Requests", new { id = item.Id }, null)" style="text-decoration:none">
                 <div class="requesttable" >
-                    <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
-                    <img src="@Html.DisplayFor(modelItem => item.Img)" />
+                    <h2 style="color:#FF4040">@Html.DisplayFor(modelItem => item.Title)</h2>
+                    <img src="@Html.DisplayFor(modelItem => item.Img)" align="middle" />
                     <div class="requestcontent">
                         <p>@Html.DisplayFor(modelItem => item.AuthorUn)</p>
                         <p>@Html.DisplayFor(modelItem => item.Date)</p>

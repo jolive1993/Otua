@@ -24,19 +24,23 @@ textarea {
 }
 #indexjumbo
 {
+    color:white;
+     text-shadow: 1px 1px #000000;
     text-align:center;
     justify-content:center;
+    background-image:url(https://wallpaperscraft.com/image/bmw_325i_e30_white_auto_93276_1366x768.jpg)
 }
 .requesttable{
     height: auto;
     justify-content: center;
     text-align: center;
     width: auto;
-    border: 1px solid black;
+    box-shadow: 10px 10px 5px #888888;
 }
 .requestcontent{
+    text-align:center;
     font-size: 18px;
-    color:darkred
+    color:#191919;
 }
 .topbutton{
     padding-bottom:20px;
