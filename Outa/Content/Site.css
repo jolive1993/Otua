@@ -67,4 +67,11 @@ textarea {
     padding-top:50px;
     text-align:center;
 }
-#map { height: 180px; }
+#map { 
+       height: 400px; 
+       width:auto;
+}
+.detailsImage
+{
+    vertical-align:middle;
+}

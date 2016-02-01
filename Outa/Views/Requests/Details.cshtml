@@ -13,7 +13,7 @@
 <h2>@Html.DisplayFor(model => model.Title)</h2>
 <div class="row">
     <div class="col-md-8">
-        <img src="@Html.DisplayFor(model => model.Img)" />
+        <img src="@Html.DisplayFor(model => model.Img)" class="detailsImage" />
     </div>
     <div class="col-md-4">
         <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
