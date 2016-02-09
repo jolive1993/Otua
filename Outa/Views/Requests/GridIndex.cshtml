@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Outa.Models.Request>
+﻿@model PagedList.IPagedList<Outa.Models.Request>
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "GridIndex";
     Layout = "/Views/Shared/LayoutFluid.cshtml";
@@ -11,9 +13,9 @@
     <link rel="stylesheet" type="text/css" href="~/Content/component.css"/>
     <link rel="stylesheet" type="text/css" href="~/Content/hover.css" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
-    <script src="~/Scripts/imagesloaded.pkgd.js"></script>
+    <script src="~/Scripts/jquery.infinitescroll.min.js"></script>
     <script src="~/Scripts/masonry.pkgd.min.js"></script>
+    <script src="~/Scripts/imagesloaded.pkgd.js"></script>
 </head>
 <body>
     <header>
@@ -21,38 +23,40 @@
     </header>
     <div class="container-fluid" id="grid-container">
         <div class="grid" id="grid">
-@foreach (var item in Model)
+@foreach (var item in ViewBag.onePage)
 {
             <div class="grid-item">
                 <a href="@Url.Action("Details", "Requests", new { id = item.Id }, null)" style="text-decoration:none">
                     <div class="hvr-grow">
                 <div class="requesttable">
-                    <h2 style="color:#FF4040">@Html.DisplayFor(modelItem => item.Title)</h2>
-                    <img src="@Html.DisplayFor(modelItem => item.Img)" align="middle" />
+                    <h2 style="color:#FF4040">@item.Title</h2>
+                    <img src="@item.Img" align="middle" />
                     <div class="requestcontent">
-                        <p>@Html.DisplayFor(modelItem => item.AuthorUn)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Date)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Tags)</p>
+                        <p>@item.AuthorUn</p>
+                        <p>@item.Date</p>
+                        <p>@item.Tags</p>
                     </div>
                     </div>
                         </div>
                 </a>
             </div>
 }
+            <div id="page-nav">
+                <a id="next-page" href="/Requests/GridIndex?page=2" rel="next">»</a>
+            </div>
         </div>
     </div>
     <script>
         (function () {
 
             // Main content container
-            var $container = $('#grid-container');
+            var $container = $('#grid');
 
             // Masonry + ImagesLoaded
             $container.imagesLoaded(function () {
                 $container.masonry({
                     // selector for entry content
                     itemSelector: '.grid-item',
-                    isFitWidth: true
                 });
             });
 
@@ -60,11 +64,11 @@
             $container.infinitescroll({
 
                 // selector for the paged navigation (it will be hidden)
-                navSelector: ".navigation",
+                navSelector: "#page-nav",
                 // selector for the NEXT link (to page 2)
-                nextSelector: ".nav-previous a",
+                nextSelector: "#next-page",
                 // selector for all items you'll retrieve
-                itemSelector: ".entry-content",
+                itemSelector: ".grid-item",
 
                 // finished message
                 loading: {
@@ -73,31 +77,19 @@
             },
 
                 // Trigger Masonry as a callback
-                function (newElements) {
-                    // hide new items while they are loading
-                    var $newElems = $(newElements).css({ opacity: 0 });
-                    // ensure that images load before adding to masonry layout
-                    $newElems.imagesLoaded(function () {
-                        // show elems now they're ready
-                        $newElems.animate({ opacity: 1 });
-                        $container.masonry('appended', $newElems, true);
-                    });
+		function (newElements) {
+		    // hide new items while they are loading
+		    var $newElems = $(newElements).css({ opacity: 0 });
+		    $newElems.animate({ opacity: 1 });
+		    $container.masonry('appended', $newElems, true);
+		    // ensure that images load before adding to masonry layout
+		    $newElems.imagesLoaded(function () {
+		        // show elems now they're ready
+		        $newElems.animate({ opacity: 1 });
+		        $container.masonry('appended', $newElems, true);
+		    });
 
-                });
-
-            /**
-             * OPTIONAL!
-             * Load new pages by clicking a link
-             */
-
-            // Pause Infinite Scroll
-            $(window).unbind('.infscr');
-
-            // Resume Infinite Scroll
-            $('.nav-previous a').click(function () {
-                $container.infinitescroll('retrieve');
-                return false;
-            });
+		});
 
         })();
     </script>

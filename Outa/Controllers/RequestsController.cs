@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Outa.Models;
 using Microsoft.AspNet.Identity;
+using PagedList.Mvc;
+using PagedList;
 
 namespace Outa.Controllers
 {
@@ -22,12 +24,15 @@ namespace Outa.Controllers
             var list = db.Requests.ToList();
             return View(list);
         }
-        public ActionResult GridIndex()
+        public ActionResult GridIndex(int? page)
         {
             var list = db.Requests.Where(model => model.Status == 0).ToList();
             List<Request> sortedList = list.OrderBy(r => r.Id).ToList();
             sortedList.Reverse();
-            return View(sortedList);
+            var pageNumber = page ?? 1;
+            var onePage = sortedList.ToPagedList(pageNumber, 15);
+            ViewBag.onePage = onePage;
+            return View();
         }
         [Authorize]
         public ActionResult MyRequests()
