@@ -24,9 +24,19 @@ namespace Outa.Controllers
             var list = db.Requests.ToList();
             return View(list);
         }
-        public ActionResult GridIndex(int? page)
+        public ActionResult GridIndex(int? page, string searchString, string currentFilter)
         {
-            var list = db.Requests.Where(model => model.Status == 0).ToList();
+            List<Request> list;
+            if (searchString != null)
+            {
+                list = db.Requests.Where(model => model.Tags.Contains(searchString)
+                && model.Status == 0).ToList();
+            }
+            else
+            {
+                list = db.Requests.Where(model => model.Status == 0).ToList();
+            }
+            ViewBag.CurrentFilter = searchString;
             List<Request> sortedList = list.OrderBy(r => r.Id).ToList();
             sortedList.Reverse();
             var pageNumber = page ?? 1;

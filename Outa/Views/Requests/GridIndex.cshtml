@@ -22,80 +22,88 @@
     <header>
         <h1>Recent Requests</h1>
     </header>
-    <div class="container-fluid" id="grid-container">
-        <div class="grid" id="grid">
-@foreach (var item in ViewBag.onePage)
+@using (Html.BeginForm())
 {
-            <div class="grid-item">
-                <a href="@Url.Action("Details", "Requests", new { id = item.Id }, null)" style="text-decoration:none">
-                    <div class="hvr-grow">
-                <div class="requesttable">
-                    <h2 style="color:#FF4040">@item.Title</h2>
-                    <img src="@item.Img" align="middle" />
-                    <div class="requestcontent">
-                        <p>@item.AuthorUn</p>
-                        <p>@item.Date</p>
-                        <p>@item.Tags</p>
-                    </div>
-                    </div>
-                        </div>
-                </a>
+    <div class="form-horizontal" style="text-align:center">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="row" style="padding:15px">
+                Search By Tag
             </div>
-}
-            <div id="page-nav">
-                <a id="next-page" href="/Requests/GridIndex?page=2" rel="next">»</a>
+            <div class="col-md-4 col-md-offset-4">
+                <input id="SearchString" name="SearchString" type="text" class="form-control" style="width:100%">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Search" class="btn btn-default" style="width:30%" />
             </div>
         </div>
     </div>
-    <script>
-        (function () {
-
-            // Main content container
-            var $container = $('#grid');
-
-            // Masonry + ImagesLoaded
-            $container.imagesLoaded(function () {
-                $container.masonry({
-                    // selector for entry content
-                    itemSelector: '.grid-item',
-                });
-            });
-            var $children = $container.children();
-            $children.addClass("animated zoomIn");
-            $children.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $children.removeClass("animated zoomIn");
-            });
-            // Infinite Scroll
-            $container.infinitescroll({
-
-                // selector for the paged navigation (it will be hidden)
-                navSelector: "#page-nav",
-                // selector for the NEXT link (to page 2)
-                nextSelector: "#next-page",
-                // selector for all items you'll retrieve
-                itemSelector: ".grid-item",
-
-                // finished message
-                loading: {
-                    finishedMsg: 'No more pages to load.'
+        }
+        <div class="container-fluid" id="grid-container">
+            <div class="grid" id="grid">
+                @foreach (var item in ViewBag.onePage)
+                {
+                    <div class="grid-item">
+                        <a href="@Url.Action("Details", "Requests", new { id = item.Id }, null)" style="text-decoration:none">
+                            <div class="hvr-grow">
+                                <div class="requesttable">
+                                    <h2 style="color:#FF4040">@item.Title</h2>
+                                    <img src="@item.Img" align="middle" />
+                                    <div class="requestcontent">
+                                        <p>@item.AuthorUn</p>
+                                        <p>@item.Date</p>
+                                        <p>@item.Tags</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 }
-            },
+                <div id="page-nav">
+                    <a id="next-page" href="/Requests/GridIndex?page=2"></a>
+                </div>
+            </div>
+        </div>
+        <script>
+            (function () {
 
-                // Trigger Masonry as a callback
-		function (newElements) {
-		    // hide new items while they are loading
-		    var $newElems = $(newElements).css({ opacity: 0 });
-		    // ensure that images load before adding to masonry layout
-		    imagesLoaded($newElems, function () {
-		        $newElems.addClass("animated zoomIn")
-		        $container.masonry('appended', $newElems, true);
-		        $newElems.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-		            $newElems.removeClass("animated zoomIn");
-		        });
-		    })
-		});
+                var $container = $('#grid');
 
-        })();
-    </script>
+                $container.imagesLoaded(function () {
+                    $container.masonry({
+                        itemSelector: '.grid-item',
+                    });
+                });
+                var $children = $container.children();
+                $children.addClass("animated zoomIn");
+                $children.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $children.removeClass("animated zoomIn");
+                });
+                $container.infinitescroll({
+
+                    navSelector: "#page-nav",
+                    nextSelector: "#next-page",
+                    itemSelector: ".grid-item",
+
+                    loading: {
+                        finishedMsg: 'No more pages to load.'
+                    }
+                },
+
+            function (newElements) {
+                var $newElems = $(newElements).css({ opacity: 0 });
+                imagesLoaded($newElems, function () {
+                    $newElems.addClass("animated zoomIn")
+                    $container.masonry('appended', $newElems, true);
+                    $newElems.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                        $newElems.removeClass("animated zoomIn");
+                    });
+                })
+            });
+
+            })();
+        </script>
 </body>
 </html>
