@@ -3,69 +3,85 @@
 @{
     ViewBag.Title = "MyRequests";
 }
-
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+</head>
 <h2>MyRequests</h2>
+<body>
+    <table id="myTable" class="tablesorter-metro-dark">
+        <thead>
+        <tr class="dark-row">
+            <th class="sorter-false">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorUn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Offers
+            </th>
+            <th></th>
+        </tr>
+            </thead>
+        <tbody>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuthorUn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tags)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            Offers
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorUn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tags)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @if (item.Status == 0)
+                    {
+                        @Html.Raw("Open")
+                    }
+                    else if (item.Status == 1)
+                    {
+                        @Html.Raw("Accepted Offer")
+                    }
+                </td>
+                <td id="countoffers">
+                    @{
+                        var c = new Outa.Controllers.RequestsController();
+                        @c.getOfferCount(item.Id);
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                    @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, null)
+                </td>
+            </tr>
+                        }
+</tbody>
+    </table>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#myTable").tablesorter();
+    }
+    );
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuthorUn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tags)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @if (item.Status == 0)
-            {
-                @Html.Raw("Open")
-            }
-            else if (item.Status == 1)
-            {
-                @Html.Raw("Accepted Offer")
-            }
-        </td>
-        <td id="countoffers">
-            @{ 
-                var c = new Outa.Controllers.RequestsController();
-                @c.getOfferCount(item.Id);
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
-            @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, null)
-        </td>
-    </tr>
-}
-
-</table>
+</script>

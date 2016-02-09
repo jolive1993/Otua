@@ -25,10 +25,17 @@ textarea {
 #indexjumbo
 {
     color:white;
-     text-shadow: 1px 1px #000000;
+    text-shadow: 1px 1px #000000;
     text-align:center;
     justify-content:center;
-    background-image:url(https://wallpaperscraft.com/image/bmw_325i_e30_white_auto_93276_1366x768.jpg)
+    background-image:url(https://wallpaperscraft.com/image/bmw_325i_e30_white_auto_93276_1366x768.jpg);
+    height:700px;
+    vertical-align:middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jumbo-content{
 }
 .requesttable{
     height: auto;
