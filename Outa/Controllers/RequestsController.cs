@@ -25,14 +25,17 @@ namespace Outa.Controllers
         public ActionResult GridIndex()
         {
             var list = db.Requests.Where(model => model.Status == 0).ToList();
-            return View(list);
+            List<Request> sortedList = list.OrderBy(r => r.Id).ToList();
+            sortedList.Reverse();
+            return View(sortedList);
         }
         [Authorize]
         public ActionResult MyRequests()
         {
             var userid = User.Identity.GetUserId();
             var list = db.Requests.Where(model => model.Author == userid).ToList();
-            return View(list);
+            List<Request> sortedList = list.OrderBy(r => r.Status).ToList();
+            return View(sortedList);
         }
 
         // GET: Requests/Details/5
@@ -134,7 +137,7 @@ namespace Outa.Controllers
                 return HttpNotFound();
             }
             var user = User.Identity.GetUserId();
-            if (request.Author == user)
+            if (request.Author == user || User.IsInRole("admin"))
             {
                 return View(request);
             }
@@ -162,6 +165,18 @@ namespace Outa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [NonAction]
+        public int getOfferCount(int itemID)
+        {
+            int numOffers;
+            using (var context = new Outa.Models.ApplicationDbContext())
+            {
+                var q = String.Format("SELECT * FROM dbo.Offer WHERE o_Parent = {0}", itemID);
+                var count = context.Offers.SqlQuery(q).ToList();
+                numOffers = count.Count;
+            }
+            return numOffers;
         }
     }
 }

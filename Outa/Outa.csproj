@@ -219,7 +219,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\component.css" />
-    <Content Include="Content\default.css" />
+    <Content Include="Content\hover.css" />
+    <Content Include="Content\img\car.ico" />
     <Content Include="Content\leaflet-routing-machine.css" />
     <Content Include="Content\remodal-default-theme.css" />
     <Content Include="Content\remodal.css" />
@@ -228,13 +229,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\AnimOnScroll.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\classie.js" />
-    <Content Include="Scripts\imagesloaded.js" />
+    <Content Include="Scripts\imagesloaded.pkgd.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -245,7 +244,6 @@
     <Content Include="Scripts\leaflet-routing-machine.js" />
     <Content Include="Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\remodal.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -306,7 +304,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

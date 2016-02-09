@@ -8,25 +8,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Effects for Grid Items | Demo 1</title>
-    <meta name="description" content="Loading Effects for Grid Items with CSS Animations" />
-    <meta name="keywords" content="css animation, loading effect, google plus, grid items, masonry" />
-    <meta name="author" content="Codrops" />
     <link rel="stylesheet" type="text/css" href="~/Content/component.css"/>
+    <link rel="stylesheet" type="text/css" href="~/Content/hover.css" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/modernizr.custom.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
+    <script src="~/Scripts/imagesloaded.pkgd.js"></script>
+    <script src="~/Scripts/masonry.pkgd.min.js"></script>
 </head>
-<body class="gridbody">
-    <div class="container-fluid">
-        <header>
-            <h1>Recent Requests</h1>
-        </header>
-        <ul class="grid effect-2" id="grid">
+<body>
+    <header>
+        <h1>Recent Requests</h1>
+    </header>
+    <div class="container-fluid" id="grid-container">
+        <div class="grid" id="grid">
 @foreach (var item in Model)
 {
-            <li>
+            <div class="grid-item">
                 <a href="@Url.Action("Details", "Requests", new { id = item.Id }, null)" style="text-decoration:none">
-                <div class="requesttable" >
+                    <div class="hvr-grow">
+                <div class="requesttable">
                     <h2 style="color:#FF4040">@Html.DisplayFor(modelItem => item.Title)</h2>
                     <img src="@Html.DisplayFor(modelItem => item.Img)" align="middle" />
                     <div class="requestcontent">
@@ -35,21 +35,71 @@
                         <p>@Html.DisplayFor(modelItem => item.Tags)</p>
                     </div>
                     </div>
+                        </div>
                 </a>
-            </li>
+            </div>
 }
-        </ul>
+        </div>
     </div>
-    <script src="~/Scripts/masonry.pkgd.min.js"></script>
-    <script src="~/Scripts/imagesloaded.js"></script>
-    <script src="~/Scripts/classie.js"></script>
-    <script src="~/Scripts/AnimOnScroll.js"></script>
     <script>
-			new AnimOnScroll( document.getElementById( 'grid' ), {
-				minDuration : 0.4,
-				maxDuration : 0.7,
-				viewportFactor : 0.2
-			});
+        (function () {
+
+            // Main content container
+            var $container = $('#grid-container');
+
+            // Masonry + ImagesLoaded
+            $container.imagesLoaded(function () {
+                $container.masonry({
+                    // selector for entry content
+                    itemSelector: '.grid-item',
+                    isFitWidth: true
+                });
+            });
+
+            // Infinite Scroll
+            $container.infinitescroll({
+
+                // selector for the paged navigation (it will be hidden)
+                navSelector: ".navigation",
+                // selector for the NEXT link (to page 2)
+                nextSelector: ".nav-previous a",
+                // selector for all items you'll retrieve
+                itemSelector: ".entry-content",
+
+                // finished message
+                loading: {
+                    finishedMsg: 'No more pages to load.'
+                }
+            },
+
+                // Trigger Masonry as a callback
+                function (newElements) {
+                    // hide new items while they are loading
+                    var $newElems = $(newElements).css({ opacity: 0 });
+                    // ensure that images load before adding to masonry layout
+                    $newElems.imagesLoaded(function () {
+                        // show elems now they're ready
+                        $newElems.animate({ opacity: 1 });
+                        $container.masonry('appended', $newElems, true);
+                    });
+
+                });
+
+            /**
+             * OPTIONAL!
+             * Load new pages by clicking a link
+             */
+
+            // Pause Infinite Scroll
+            $(window).unbind('.infscr');
+
+            // Resume Infinite Scroll
+            $('.nav-previous a').click(function () {
+                $container.infinitescroll('retrieve');
+                return false;
+            });
+
+        })();
     </script>
 </body>
 </html>

@@ -46,6 +46,7 @@ namespace Outa.Controllers
         {
             var userid = User.Identity.GetUserId();
             var list = db.Offers.Where(model => model.o_Author == userid).ToList();
+            List<Offer> sortedList = list.OrderBy(o => o.o_Status).ToList();
             return View(list);
         }
 

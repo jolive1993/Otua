@@ -54,13 +54,9 @@
             }
         </td>
         <td id="countoffers">
-            @{
-                using (var context = new Outa.Models.ApplicationDbContext())
-                {
-                    var q = String.Format("SELECT * FROM dbo.Offer WHERE o_Parent = {0}", item.Id);
-                    var count = context.Offers.SqlQuery(q).ToList();
-                    @count.Count;
-                }
+            @{ 
+                var c = new Outa.Controllers.RequestsController();
+                @c.getOfferCount(item.Id);
             }
         </td>
         <td>
