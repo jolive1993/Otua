@@ -30,7 +30,7 @@ namespace Outa.Controllers
             List<Request> sortedList = list.OrderBy(r => r.Id).ToList();
             sortedList.Reverse();
             var pageNumber = page ?? 1;
-            var onePage = sortedList.ToPagedList(pageNumber, 15);
+            var onePage = sortedList.ToPagedList(pageNumber, 10);
             ViewBag.onePage = onePage;
             return View();
         }

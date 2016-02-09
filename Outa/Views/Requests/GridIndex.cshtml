@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="~/Content/component.css"/>
     <link rel="stylesheet" type="text/css" href="~/Content/hover.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/animate.css" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.infinitescroll.min.js"></script>
     <script src="~/Scripts/masonry.pkgd.min.js"></script>
@@ -59,7 +60,11 @@
                     itemSelector: '.grid-item',
                 });
             });
-
+            var $children = $container.children();
+            $children.addClass("animated zoomIn");
+            $children.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $children.removeClass("animated zoomIn");
+            });
             // Infinite Scroll
             $container.infinitescroll({
 
@@ -80,15 +85,14 @@
 		function (newElements) {
 		    // hide new items while they are loading
 		    var $newElems = $(newElements).css({ opacity: 0 });
-		    $newElems.animate({ opacity: 1 });
-		    $container.masonry('appended', $newElems, true);
 		    // ensure that images load before adding to masonry layout
-		    $newElems.imagesLoaded(function () {
-		        // show elems now they're ready
-		        $newElems.animate({ opacity: 1 });
+		    imagesLoaded($newElems, function () {
+		        $newElems.addClass("animated zoomIn")
 		        $container.masonry('appended', $newElems, true);
-		    });
-
+		        $newElems.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+		            $newElems.removeClass("animated zoomIn");
+		        });
+		    })
 		});
 
         })();
