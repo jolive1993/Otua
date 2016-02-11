@@ -7,13 +7,13 @@ namespace Outa.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Offer : IMigrationMetadata
+    public sealed partial class Profile1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Offer));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Profile1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601262108176_Offer"; }
+            get { return "201602111835163_Profile1"; }
         }
         
         string IMigrationMetadata.Source

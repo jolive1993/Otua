@@ -10,7 +10,6 @@ namespace Outa.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Outa.Models.ApplicationDbContext";
         }
 
         protected override void Seed(Outa.Models.ApplicationDbContext context)

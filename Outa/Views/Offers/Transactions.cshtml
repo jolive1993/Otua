@@ -68,18 +68,7 @@
                 @Html.ActionLink("Details", "Details", new { id = item.Id })
                 @if (item.o_Status == 1)
                 {
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                        <input type="hidden" name="cmd" value="_xclick">
-                        <input type="hidden" name="business" value="rockitshipshawty@gmal.com">
-                        <input type="hidden" name="lc" value="BT">
-                        <input type="hidden" name="item_name" value="sdsfds">
-                        <input type="hidden" name="amount" value="100.00">
-                        <input type="hidden" name="currency_code" value="USD">
-                        <input type="hidden" name="button_subtype" value="services">
-                        <input type="hidden" name="no_note" value="0">
-                        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
-                        <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-small.png" alt="Buy now with PayPal" />
-                    </form>
+                    @Html.ActionLink("Pay Now", "Create", "Transactions", new { id = item.Id }, null)
                 }
             </td>
         </tr>

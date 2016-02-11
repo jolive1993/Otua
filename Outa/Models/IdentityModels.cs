@@ -34,5 +34,10 @@ namespace Outa.Models
 
         public System.Data.Entity.DbSet<Outa.Models.Offer> Offers { get; set; }
 
+        public System.Data.Entity.DbSet<Outa.Models.Profile> Profiles { get; set; }
+
+        public System.Data.Entity.DbSet<Outa.Models.Review> Reviews { get; set; }
+
+        public System.Data.Entity.DbSet<Outa.Models.Transaction> Transactions { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace Outa.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Request1 : IMigrationMetadata
+    public sealed partial class swag : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Request1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(swag));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601271717173_Request1"; }
+            get { return "201602112222369_swag"; }
         }
         
         string IMigrationMetadata.Source

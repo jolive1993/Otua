@@ -3,7 +3,7 @@ namespace Outa.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Profile : DbMigration
     {
         public override void Up()
         {
@@ -18,6 +18,7 @@ namespace Outa.Migrations
                         o_Date = c.DateTime(nullable: false),
                         o_Price = c.Decimal(precision: 18, scale: 2),
                         o_Parent = c.Int(nullable: false),
+                        o_Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -26,11 +27,16 @@ namespace Outa.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false, maxLength: 36),
                         Content = c.String(),
                         Author = c.String(maxLength: 128),
                         AuthorUn = c.String(maxLength: 256),
                         Date = c.DateTime(nullable: false),
                         Tags = c.String(nullable: false),
+                        Status = c.Int(nullable: false),
+                        Img = c.String(),
+                        Lat = c.String(),
+                        Long = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
