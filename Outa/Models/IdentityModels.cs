@@ -33,5 +33,6 @@ namespace Outa.Models
         public System.Data.Entity.DbSet<Outa.Models.Request> Requests { get; set; }
 
         public System.Data.Entity.DbSet<Outa.Models.Offer> Offers { get; set; }
+
     }
 }

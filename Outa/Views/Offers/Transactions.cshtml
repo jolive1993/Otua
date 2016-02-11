@@ -3,10 +3,15 @@
 @{
     ViewBag.Title = "Transactions";
 }
-
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+</head>
 <h2>Transactions</h2>
 
-<table class="table">
+<table id="myTable" class="tablesorter-metro-dark">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.o_AuthorUn)
@@ -24,6 +29,8 @@
             @Html.DisplayNameFor(model => model.o_Parent)
         </th>
     </tr>
+        </thead>
+    <tbody>
 
     @foreach (var item in Model)
     {
@@ -77,5 +84,13 @@
             </td>
         </tr>
     }
+        </tbody>
 
 </table>
+<script>
+    $(document).ready(function () {
+        $("#myTable").tablesorter();
+    }
+    );
+
+</script>

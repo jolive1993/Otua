@@ -3,63 +3,79 @@
 @{
     ViewBag.Title = "MyOffers";
 }
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+</head>
 
 <h2>MyOffers</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.o_AuthorUn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Parent)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="myTable" class="tablesorter-metro-dark">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.o_AuthorUn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.o_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.o_Price)
-            </td>
-            <td>
-                @if (item.o_Status == 0)
-                {
-                    @Html.Raw("Open")
-                }
-                else if (item.o_Status == 1)
-                {
-                    @Html.Raw("Accepted Offer")
-                }
-            </td>
-            <td>
-                @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
-                @if (item.o_Status == 0)
-                {
-                    @Html.Raw("|")
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.o_AuthorUn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o_Parent)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.o_AuthorUn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.o_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.o_Price)
+                </td>
+                <td>
+                    @if (item.o_Status == 0)
+                {
+                        @Html.Raw("Open")
+                    }
+                    else if (item.o_Status == 1)
+                    {
+                        @Html.Raw("Accepted Offer")
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @if (item.o_Status == 0)
+                {
+                        @Html.Raw("|")
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $("#myTable").tablesorter();
+    }
+    );
+
+</script>
+

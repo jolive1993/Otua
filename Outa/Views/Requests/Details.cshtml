@@ -16,7 +16,7 @@
         <img src="@Html.DisplayFor(model => model.Img)" class="detailsImage" />
     </div>
     <div class="col-md-4">
-        <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
+        <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-default btn-large", @style = "width:100%" })</p>
         <p>@Html.ActionLink("Ask Question", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
         <div id="map"></div>
     </div>

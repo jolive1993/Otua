@@ -47,15 +47,15 @@ textarea {
 .requestcontent{
     text-align:center;
     font-size: 18px;
-    color:#191919;
+    color:#0ea7b5;
 }
 .topbutton{
-    padding-bottom:20px;
 }
 .detailsContent{
     font-size:large;
     text-align:center;
     padding-top:50px;
+    color:#0c457d;
 }
 .detailsOther
 {
@@ -65,7 +65,7 @@ textarea {
 }
 .detailsOtherH
 {
-    color:red;
+    color:#0c457d;
     font-size:large;
     text-align:center;
     padding-top:0px;
@@ -85,4 +85,7 @@ textarea {
 .spacer{
     padding-top:30px;
     padding-bottom:30px;
+}
+#grid-container{
+    padding-top:100px;
 }
