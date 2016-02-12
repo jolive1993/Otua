@@ -10,6 +10,7 @@ using Outa.Models;
 using Microsoft.AspNet.Identity;
 using PagedList.Mvc;
 using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace Outa.Controllers
 {
@@ -24,8 +25,34 @@ namespace Outa.Controllers
             var list = db.Requests.ToList();
             return View(list);
         }
-        public ActionResult GridIndex(int? page, string searchString, string currentFilter)
+        public ActionResult GridIndex(int? page, string searchString, string currentFilter, string latlng)
         {
+            double lat;
+            double longt;
+            if(latlng == null)
+            {
+                if (User.Identity.GetUserId() != null)
+                {
+                    string userId = User.Identity.GetUserId();
+                    var profile = db.Profiles.Where(p => p.UserID == userId).ToList();
+                    lat = Convert.ToDouble(profile[0].Lat);
+                    longt = Convert.ToDouble(profile[0].Long);
+                }
+                else
+                {
+                    lat = 43.0389025;
+                    longt = -87.90647360000003;
+                }
+            }
+            else
+            {
+                string[] latngArray;
+                latngArray = latlng.Split(',');
+                lat = Convert.ToDouble(latngArray[0]);
+                longt = Convert.ToDouble(latngArray[1]);
+            }
+            ViewBag.Lat = lat;
+            ViewBag.Long = longt;
             List<Request> list;
             if (searchString != null)
             {
@@ -39,8 +66,16 @@ namespace Outa.Controllers
             ViewBag.CurrentFilter = searchString;
             List<Request> sortedList = list.OrderBy(r => r.Id).ToList();
             sortedList.Reverse();
+            List<Request> locationFiltered = new List<Request>();
+            foreach(Request r in sortedList)
+            {
+                if((Convert.ToDouble(r.Lat) - lat) <= 1)
+                {
+                    locationFiltered.Add(r);
+                }
+            }
             var pageNumber = page ?? 1;
-            var onePage = sortedList.ToPagedList(pageNumber, 10);
+            var onePage = locationFiltered.ToPagedList(pageNumber, 10);
             ViewBag.onePage = onePage;
             return View();
         }
