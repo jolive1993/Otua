@@ -41,32 +41,19 @@ namespace Outa.Controllers
             var offer = db.Offers.Find(id);
             var request = db.Requests.Find(offer.o_Parent);
             DateTime date = DateTime.Now;
-            ViewBag.Price = offer.o_Price;
-            ViewBag.RequestAuthor = request.AuthorUn;
-            ViewBag.OfferAuthor = offer.o_AuthorUn;
-            ViewBag.Date = date;
-            ViewBag.RequestId = request.Id;
-            ViewBag.OfferId = offer.Id;
-            return View();
+            Transaction transaction = new Transaction();
+            transaction.Date = date;
+            transaction.OfferId = offer.Id;
+            transaction.RequestId = request.Id;
+            offer.o_Status += 1;
+            request.Status += 1;
+            transaction.Status = 0;
+            db.Entry(offer).State = EntityState.Modified;
+            db.Entry(request).State = EntityState.Modified;
+            db.Transactions.Add(transaction);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = transaction.Id });
         }
-
-        // POST: Transactions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RequestId,OfferId,Date")] Transaction transaction)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Transactions.Add(transaction);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(transaction);
-        }
-
         // GET: Transactions/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -17,5 +17,6 @@ namespace Outa.Models
         public int? OfferId { get; set; }
 
         public DateTime? Date { get; set; }
+        public int Status { get; set; }
     }
 }

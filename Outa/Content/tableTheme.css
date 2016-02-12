@@ -72,7 +72,7 @@ Metro Dark Theme
 .tablesorter-metro-dark tbody > tr:hover > td,
 .tablesorter-metro-dark tbody > tr.even:hover > td,
 .tablesorter-metro-dark tbody > tr.odd:hover > td {
-	background-color: #BFBFBF;
+	background-color: #e6e6e6;
 	color: #000;
 }
 

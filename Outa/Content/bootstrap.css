@@ -3111,8 +3111,8 @@ fieldset[disabled] a.btn {
 .btn-default.active.focus,
 .open > .dropdown-toggle.btn-default.focus {
   color: #ffffff;
-  background-color: #1c1d1d;
-  border-color: #080808;
+  background-color: #df4620;
+  border-color: #df4620;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3168,8 +3168,8 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary.active.focus,
 .open > .dropdown-toggle.btn-primary.focus {
   color: #ffffff;
-  background-color: #881609;
-  border-color: #621007;
+  background-color: 	#383894;
+  border-color: 	#383894;
 }
 .btn-primary:active,
 .btn-primary.active,

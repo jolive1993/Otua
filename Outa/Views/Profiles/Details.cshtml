@@ -18,6 +18,11 @@
             <h1>@Html.DisplayFor(model => model.Rating)</h1>
         </div>
     </div>
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderAction("ReviewsForUser", new { id=Model.UserID }); }
+    </div>
+</div>
 <script>
     function getAddress() {
         var geocoder = new google.maps.Geocoder();

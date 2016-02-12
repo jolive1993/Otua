@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Outa.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Outa.Controllers
 {
@@ -36,8 +37,9 @@ namespace Outa.Controllers
         }
 
         // GET: Reviews/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            TempData["requestId"] = id;
             return View();
         }
 
@@ -50,6 +52,10 @@ namespace Outa.Controllers
         {
             if (ModelState.IsValid)
             {
+                int requestId = (int)TempData["requestId"];
+                review.TrnsactionId = db.Transactions.Where(t => t.RequestId == requestId).ToList()[0].Id;
+                review.UserId = User.Identity.GetUserId();
+                review.UserName = User.Identity.GetUserName();
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");

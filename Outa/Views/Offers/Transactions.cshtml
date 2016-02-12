@@ -58,7 +58,7 @@
                 @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
             </td>
             <td>
-                @if (User.Identity.Name == item.o_AuthorUn || User.IsInRole("admin"))
+                @if ((User.Identity.Name == item.o_AuthorUn && item.o_Status == 0) || User.IsInRole("admin"))
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                     @Html.Raw("|")

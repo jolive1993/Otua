@@ -226,6 +226,10 @@
     <Compile Include="Migrations\201602112222369_swag.Designer.cs">
       <DependentUpon>201602112222369_swag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602121451176_swagit.cs" />
+    <Compile Include="Migrations\201602121451176_swagit.Designer.cs">
+      <DependentUpon>201602121451176_swagit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -357,6 +361,7 @@
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
+    <Content Include="Views\Shared\_Reviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -384,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602112222369_swag.resx">
       <DependentUpon>201602112222369_swag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602121451176_swagit.resx">
+      <DependentUpon>201602121451176_swagit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

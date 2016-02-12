@@ -8,12 +8,15 @@ using System.Web;
 using System.Web.Mvc;
 using Outa.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 
 namespace Outa.Controllers
 {
     public class ProfilesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ObjectContext objectContext = ((IObjectContextAdapter) new ApplicationDbContext()).ObjectContext;
 
         // GET: Profiles
         public ActionResult Index()
@@ -25,6 +28,7 @@ namespace Outa.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
+
             {
                 var userId = User.Identity.GetUserId();
                 var profiles = db.Profiles.Where(model => model.UserID == userId).ToList();
@@ -43,6 +47,46 @@ namespace Outa.Controllers
         }
 
         // GET: Profiles/Create
+        [ChildActionOnly]
+        public ActionResult ReviewsForUser(string id)
+        {
+            List<Review> reviewList = new List<Review>();
+            ObjectSet<Offer> offers = objectContext.CreateObjectSet<Offer>();
+            ObjectSet<Transaction> transcations = objectContext.CreateObjectSet<Transaction>();
+            ObjectSet<Review> reviews = objectContext.CreateObjectSet<Review>();
+            var q =
+                    (
+                    from Offer in offers
+                    join Transaction in transcations
+                    on Offer.Id
+                    equals Transaction.OfferId
+                    join Review in reviews
+                    on Transaction.OfferId
+                    equals Review.TrnsactionId
+                    where Offer.o_Author == id
+                    select new
+                    {
+                        Id = Review.Id,
+                        UserId = Review.UserId,
+                        UserName = Review.UserName,
+                        Content = Review.Content,
+                        Rating = Review.Rating,
+                        TrnsactionId = Review.TrnsactionId
+
+                    });
+            foreach (var item in q)
+            {
+                Review r = new Review();
+                r.Id = item.Id;
+                r.UserId = item.UserId;
+                r.UserName = item.UserName;
+                r.Content = item.Content;
+                r.Rating = item.Rating;
+                r.TrnsactionId = item.TrnsactionId;
+                reviewList.Add(r);
+            }
+            return PartialView("_Reviews", reviewList);
+        }
         public ActionResult Create()
         {
             var user = User.Identity.GetUserId();

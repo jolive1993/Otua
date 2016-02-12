@@ -60,6 +60,10 @@
                     {
                         @Html.Raw("Accepted Offer")
                     }
+                    else if (item.Status == 2)
+                    {
+                        @Html.Raw("Closed")
+                    }
                 </td>
                 <td id="countoffers">
                     @{
@@ -68,10 +72,25 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                    @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, null)
+                    @if (item.Status == 0)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.Raw("|");
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.Raw("|");
+
+                    }
+                    else if (item.Status == 2)
+                    {
+                        @Html.Raw("|")
+                        @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, null)
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @if (item.Status != 2)
+                    {
+                        @Html.Raw("|")
+                        @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, null)
+                    }
                 </td>
             </tr>
                         }

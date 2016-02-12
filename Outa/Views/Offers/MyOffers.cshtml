@@ -54,15 +54,20 @@
                     {
                         @Html.Raw("Accepted Offer")
                     }
+                    else if (item.o_Status == 2)
+                    {
+                        @Html.Raw("Closed")
+                    }
                 </td>
                 <td>
                     @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id })
                     @if (item.o_Status == 0)
                 {
+                        @Html.Raw("|")
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                         @Html.Raw("|")
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }

@@ -46,13 +46,25 @@
                 @Html.DisplayFor(modelItem => item.o_Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.o_Status)
+                @if (item.o_Status == 0)
+                {
+                    @Html.Raw("Open")
+                }
+                else if (item.o_Status == 1)
+                {
+                    @Html.Raw("Accepted Offer")
+                }
+                else if (item.o_Status == 2)
+                {
+                    @Html.Raw("Closed")
+                }
             </td>
+
             <td>
                 @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
             </td>
             <td>
-                @if (User.Identity.Name == item.o_AuthorUn || User.IsInRole("admin"))
+                @if ((User.Identity.Name == item.o_AuthorUn && item.o_Status == 0) || User.IsInRole("admin"))
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                     @Html.Raw("|")
