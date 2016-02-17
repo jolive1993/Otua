@@ -10,6 +10,7 @@ Metro Dark Theme
 	border-spacing: 0;
 	margin: 10px 0 15px;
 	text-align: left;
+    border: solid 1px #e8702a;
 }
 
 .tablesorter-metro-dark tr.dark-row th, .tablesorter-metro-dark tr.dark-row td, .tablesorter-metro-dark caption.dark-row {
@@ -64,7 +65,11 @@ Metro Dark Theme
 .tablesorter-metro-dark td {
 	background-color: #fff;
 	padding: 5px;
-	vertical-align: top;
+	vertical-align: middle;
+    text-align:center;
+    border-bottom: solid 1px #e8702a;
+    border-top: solid 1px #e8702a;
+
 }
 
 /* hovered row colors */

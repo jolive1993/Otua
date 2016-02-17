@@ -206,31 +206,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602111832292_Profile.cs" />
-    <Compile Include="Migrations\201602111832292_Profile.Designer.cs">
-      <DependentUpon>201602111832292_Profile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602111835163_Profile1.cs" />
-    <Compile Include="Migrations\201602111835163_Profile1.Designer.cs">
-      <DependentUpon>201602111835163_Profile1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602111848237_Profile2.cs" />
-    <Compile Include="Migrations\201602111848237_Profile2.Designer.cs">
-      <DependentUpon>201602111848237_Profile2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602111946164_Profile3.cs" />
-    <Compile Include="Migrations\201602111946164_Profile3.Designer.cs">
-      <DependentUpon>201602111946164_Profile3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602112222369_swag.cs" />
-    <Compile Include="Migrations\201602112222369_swag.Designer.cs">
-      <DependentUpon>201602112222369_swag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602121451176_swagit.cs" />
-    <Compile Include="Migrations\201602121451176_swagit.Designer.cs">
-      <DependentUpon>201602121451176_swagit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -252,9 +227,13 @@
     <Content Include="Content\hover.css" />
     <Content Include="Content\img\car.ico" />
     <Content Include="Content\leaflet-routing-machine.css" />
+    <Content Include="Content\leaflet.routing.icons.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\remodal-default-theme.css" />
     <Content Include="Content\remodal.css" />
+    <Content Include="Content\reviews.css" />
+    <Content Include="Content\routing-icon.png" />
+    <Content Include="Content\star-rating.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\tableTheme.css" />
     <Content Include="favicon.ico" />
@@ -292,6 +271,7 @@
     <Content Include="Scripts\remodal.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\star-rating.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -373,26 +353,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602111832292_Profile.resx">
-      <DependentUpon>201602111832292_Profile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602111835163_Profile1.resx">
-      <DependentUpon>201602111835163_Profile1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602111848237_Profile2.resx">
-      <DependentUpon>201602111848237_Profile2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602111946164_Profile3.resx">
-      <DependentUpon>201602111946164_Profile3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602112222369_swag.resx">
-      <DependentUpon>201602112222369_swag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602121451176_swagit.resx">
-      <DependentUpon>201602121451176_swagit.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

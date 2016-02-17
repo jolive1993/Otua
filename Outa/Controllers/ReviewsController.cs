@@ -53,10 +53,14 @@ namespace Outa.Controllers
             if (ModelState.IsValid)
             {
                 int requestId = (int)TempData["requestId"];
-                review.TrnsactionId = db.Transactions.Where(t => t.RequestId == requestId).ToList()[0].Id;
+                Request request = db.Requests.Find(requestId);
+                request.Status = 3;
+                Transaction transaction = db.Transactions.Where(t => t.RequestId == requestId).ToList()[0];
+                review.TrnsactionId = transaction.Id;
                 review.UserId = User.Identity.GetUserId();
                 review.UserName = User.Identity.GetUserName();
                 db.Reviews.Add(review);
+                db.Entry(request).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

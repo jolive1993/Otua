@@ -10,7 +10,6 @@ using Outa.Models;
 using Microsoft.AspNet.Identity;
 using PagedList.Mvc;
 using PagedList;
-using Microsoft.AspNet.Identity;
 
 namespace Outa.Controllers
 {
@@ -64,18 +63,10 @@ namespace Outa.Controllers
                 list = db.Requests.Where(model => model.Status == 0).ToList();
             }
             ViewBag.CurrentFilter = searchString;
-            List<Request> sortedList = list.OrderBy(r => r.Id).ToList();
+            List<Request> sortedList = list.OrderBy(r => (Convert.ToDouble(r.Lat) - lat) + (Convert.ToDouble(r.Long) - longt)).ToList();
             sortedList.Reverse();
-            List<Request> locationFiltered = new List<Request>();
-            foreach(Request r in sortedList)
-            {
-                if((Convert.ToDouble(r.Lat) - lat) <= 1)
-                {
-                    locationFiltered.Add(r);
-                }
-            }
             var pageNumber = page ?? 1;
-            var onePage = locationFiltered.ToPagedList(pageNumber, 10);
+            var onePage = sortedList.ToPagedList(pageNumber, 10);
             ViewBag.onePage = onePage;
             return View();
         }
@@ -83,9 +74,8 @@ namespace Outa.Controllers
         public ActionResult MyRequests()
         {
             var userid = User.Identity.GetUserId();
-            var list = db.Requests.Where(model => model.Author == userid).ToList();
-            List<Request> sortedList = list.OrderBy(r => r.Status).ToList();
-            return View(sortedList);
+            var list = db.Requests.Where(model => model.Author == userid && model.Status < 3).ToList();
+            return View(list);
         }
 
         // GET: Requests/Details/5

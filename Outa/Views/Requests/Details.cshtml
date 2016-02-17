@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/Content/leaflet-routing-machine.css" />
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="~/Scripts/leaflet-routing-machine.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 </head>
 
 <h2>@Html.DisplayFor(model => model.Title)</h2>
@@ -18,6 +19,9 @@
     <div class="col-md-4">
         <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-default btn-large", @style = "width:100%" })</p>
         <p>@Html.ActionLink("Ask Question", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
+        <div style="text-align:center">
+            <h2 id="location"></h2>
+        </div>
         <div id="map"></div>
     </div>
 </div>
@@ -70,5 +74,29 @@
             addWaypoints: false
         }).addTo(map);
         navigator.g
+    });
+    function getAddress() {
+        var geocoder = new google.maps.Geocoder();
+        var lat = @Model.Lat;
+        var long = @Model.Long;
+        var latlng = {lat: parseFloat(lat), lng: parseFloat(long)};
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+                var address = (results[0].address_components);
+                var addressStrings = [];
+                for (i = 0; i < address.length; i++)
+                {
+                    if(address[i].types[0] == "locality" || address[i].types[0] == "administrative_area_level_1")
+                    {
+                        addressStrings.push(address[i].long_name)
+                    };
+                };
+                $('#location').text(addressStrings[0] + ", " + addressStrings[1]);
+            }
+        });
+    }
+    $( document ).ready(function() {
+        getAddress();
     });
 </script>

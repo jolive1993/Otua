@@ -1,44 +1,35 @@
 ﻿@model IEnumerable<Outa.Models.Review>
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrnsactionId)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrnsactionId)
-        </td>
-    </tr>
-}
-
-</table>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/reviews.css" />
+    <link href="~/Content/star-rating.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/star-rating.min.js"></script>
+</head>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="blog-comment">
+                <hr />
+                @foreach (var item in Model)
+                {
+                    var c = new Outa.Controllers.ProfilesController();
+                    var image = c.GetProfilePic(item.UserId);
+                <ul class="comments" style="vertical-align:middle">
+                    <li class="clearfix" style="vertical-align:middle">
+                        <img src="@image" class="avatar" alt="">
+                        <div class="post-comments">
+                            <p class="meta">@Html.ActionLink(@Html.DisplayFor(modelItem => item.UserName).ToString(), "DetailsByUserId", "Profiles", new { uid = item.UserId }, null)</p>
+                            <p style="font-size:large">
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </p>
+                            <div style="height:30px">
+                                <input id="whatever" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-disabled="true" data-show-caption="false" data-show-clear="false" value="@item.Rating">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div id="padding-guy" style="padding-top:100px"></div>

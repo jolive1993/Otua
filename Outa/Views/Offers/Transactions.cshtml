@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.o_Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.o_Parent)
+            Request
         </th>
     </tr>
         </thead>
@@ -36,7 +36,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.o_AuthorUn)
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.o_AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.o_Author }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.o_Date)
@@ -55,8 +55,13 @@
                 }
             </td>
             <td>
-                @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
+                @{
+                    var c = new Outa.Controllers.OffersController();
+                    string title = c.getRequestTitle(item.o_Parent);
+                }
+                @Html.ActionLink(title, "Details", "Requests", new { id = item.o_Parent })
             </td>
+
             <td>
                 @if ((User.Identity.Name == item.o_AuthorUn && item.o_Status == 0) || User.IsInRole("admin"))
                 {
@@ -65,10 +70,11 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     @Html.Raw("|")
                 }
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
                 @if (item.o_Status == 1)
                 {
-                    @Html.ActionLink("Pay Now", "Create", "Transactions", new { id = item.Id }, null)
+                    @Html.Raw(" ")
+                    @Html.ActionLink("Pay Now", "Create", "Transactions", new { id = item.Id }, new { @class = "btn btn-primary" })
                 }
             </td>
         </tr>

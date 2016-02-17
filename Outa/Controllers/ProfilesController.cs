@@ -45,11 +45,28 @@ namespace Outa.Controllers
             }
             return View(profile);
         }
+        public ActionResult DetailsByUserId(string uid)
+        {
+            int? id;
+            var profiles = db.Profiles.Where(model => model.UserID == uid).ToList();
+            id = profiles[0].Id;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Profile profile = db.Profiles.Find(id);
+            if (profile == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", profile);
+        }
 
         // GET: Profiles/Create
         [ChildActionOnly]
         public ActionResult ReviewsForUser(string id)
         {
+            Profile profile = db.Profiles.Where(p => p.UserID == id).ToList()[0];
             List<Review> reviewList = new List<Review>();
             ObjectSet<Offer> offers = objectContext.CreateObjectSet<Offer>();
             ObjectSet<Transaction> transcations = objectContext.CreateObjectSet<Transaction>();
@@ -84,6 +101,13 @@ namespace Outa.Controllers
                 r.Rating = item.Rating;
                 r.TrnsactionId = item.TrnsactionId;
                 reviewList.Add(r);
+            }
+            decimal? rating = (reviewList.Sum(r => r.Rating) / reviewList.Count());
+            if (profile.Rating != rating)
+            {
+                profile.Rating = rating;
+                db.Entry(profile).State = EntityState.Modified;
+                db.SaveChanges();
             }
             return PartialView("_Reviews", reviewList);
         }
@@ -187,6 +211,14 @@ namespace Outa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [NonAction]
+        public string GetProfilePic(string id)
+        {
+            string imgUrl;
+            Profile profile = db.Profiles.Where(p => p.UserID == id).ToList()[0];
+            imgUrl = profile.Img;
+            return imgUrl;
         }
     }
 }

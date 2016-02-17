@@ -8,16 +8,13 @@
     <script src="~/Scripts/jquery-2.2.0.js"></script>
     <script src="~/Scripts/jquery.tablesorter.min.js"></script>
 </head>
-<h2>MyRequests</h2>
+
 <body>
     <table id="myTable" class="tablesorter-metro-dark">
         <thead>
         <tr class="dark-row">
-            <th class="sorter-false">
+            <th onclick="animater()">
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AuthorUn)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tags)
@@ -31,20 +28,23 @@
             <th>
                 Offers
             </th>
-            <th></th>
+            <th class="sorter-false"></th>
         </tr>
             </thead>
         <tbody>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+            <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
+                <td style="vertical-align:middle">
+                    <div class="row">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </div>
+                    <div class="row">
+                            <img class="table-image" src="@(item.Img)" />
+                    </div>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AuthorUn)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Tags)
                 </td>
@@ -74,22 +74,20 @@
                 <td>
                     @if (item.Status == 0)
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                        @Html.Raw("|");
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        @Html.Raw("|");
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.Raw(" ")
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.Raw(" ")
+                        @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
 
+                    }
+                    else if (item.Status == 1)
+                    {
+                        @Html.ActionLink("Go to transactions", "Transactions", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
                     }
                     else if (item.Status == 2)
                     {
-                        @Html.Raw("|")
-                        @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, null)
-                    }
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                    @if (item.Status != 2)
-                    {
-                        @Html.Raw("|")
-                        @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, null)
+                        @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, new { @class = "btn btn-primary" })
                     }
                 </td>
             </tr>
@@ -100,7 +98,9 @@
 <script>
     $(document).ready(function () {
         $("#myTable").tablesorter();
+        $(".clickable-row").click(function () {
+            window.document.location = $(this).data("href");
+        });
     }
     );
-
 </script>

@@ -15,7 +15,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.o_AuthorUn)
+                Request
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.o_Date)
@@ -26,9 +26,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.o_Status)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.o_Parent)
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,7 +34,11 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.o_AuthorUn)
+                    @{
+                        var c = new Outa.Controllers.OffersController();
+                        string title = c.getRequestTitle(item.o_Parent);
+                    }
+                    @Html.ActionLink(title, "Details", "Requests", new { id = item.o_Parent }, null)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.o_Date)
@@ -60,16 +61,13 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.o_Parent).ToString(), "Details", "Requests", new { id = item.o_Parent }, null)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class="btn btn-primary" })
                     @if (item.o_Status == 0)
                 {
-                        @Html.Raw("|")
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                        @Html.Raw("|")
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.Raw(" ")
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.Raw(" ")
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
                     }
                 </td>
             </tr>

@@ -203,5 +203,16 @@ namespace Outa.Controllers
             }
             base.Dispose(disposing);
         }
+        [NonAction]
+        public string getRequestTitle(int itemID)
+        {
+            string title;
+            using (var context = new Outa.Models.ApplicationDbContext())
+            {
+                Request request = context.Requests.Find(itemID);
+                title = request.Title;
+            }
+            return title;
+        }
     }
 }

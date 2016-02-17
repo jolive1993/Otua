@@ -20,9 +20,6 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 </head>
 <body>
-    <header>
-        <h1>Recent Requests</h1>
-    </header>
 @using (Html.BeginForm())
 {
     <div class="form-horizontal" style="text-align:center">
@@ -32,12 +29,17 @@
                 Search By Tag
             </div>
             <div class="col-md-4 col-md-offset-4">
-                <input id="SearchString" name="SearchString" type="text" class="form-control" style="width:100%">
+                <input id="SearchString" name="SearchString" type="text" class="form-control" style="width:100%; text-align:center">
             </div>
         </div>
         <div class="form-group">
+            <div class="row">
+                <div class="col-md-12" style="padding-bottom:15px">
+                    Browsing in
+                </div>
+            </div>
             <div class="col-md-4 col-md-offset-4">
-                <input id="location" type="text" class="form-control" onblur="byAdress()" style="width:100%">
+                <input id="location" type="text" class="form-control" onblur="byAdress()" style="width:100%; text-align:center">
             </div>
         </div>
         <div hidden class="form-group">
@@ -115,6 +117,14 @@
             });
 
             })();
+            function geoLocation() {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var latitude = position.coords.latitude
+                    var longitude = position.coords.longitude;
+                    var latlng = (latitude + "," + longitude);
+                    return latlng;
+                });
+            }
             function getAddress() {
                 var geocoder = new google.maps.Geocoder();
                 var lat = @ViewBag.Lat;
@@ -127,24 +137,25 @@
                         var address = (results[0].formatted_address).split(",");
                         console.log(address);
                         $('#location').val(address[1]);
-                        console.log($('#location').val());
                         byAdress();
                     }
                 });
             };
             function byAdress()
             {
+                var address;
                 var geocoder = new google.maps.Geocoder();
-                var address = ($('#location').val()).replace(" ", "");
-                geocoder.geocode({ 'address': address }, function (results, status) {
-                    console.log(status);
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var latitude = results[0].geometry.location.lat();
-                        var longitude = results[0].geometry.location.lng();
-                        console.log(latitude);
-                        $("#latlng").val(latitude + "," + longitude);
-                    }
-                });
+                console.log($('#location').val());
+                    address = ($('#location').val()).replace(" ", "");
+                    geocoder.geocode({ 'address': address }, function (results, status) {
+                        console.log(status);
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var latitude = results[0].geometry.location.lat();
+                            var longitude = results[0].geometry.location.lng();
+                            console.log(latitude);
+                            $("#latlng").val(latitude + "," + longitude);
+                        }
+                    });
             };
             $( document ).ready(function() {
                 getAddress();
