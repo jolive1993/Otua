@@ -4739,6 +4739,10 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   background-image: -o-linear-gradient(top, #fc9f8a, #fa623f);
   background-image: linear-gradient(to bottom, #fc9f8a, #fa623f);
 }
+.navbar-inverse .navbar-nav > li > a .badge:empty
+{
+    display:none;
+}
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
   display: inline-block;

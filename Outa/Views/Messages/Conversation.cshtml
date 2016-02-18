@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Outa.Models.Message>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Conversation";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/message.css" />
+</head>
+@{
+    var v = new Outa.Controllers.OffersController();
+    string title = v.getRequestTitle(Model.First().RequestID);
+}
+<div class="row" style="text-align:center">
+    <div class="col-md-12">
+        <h1>@Html.ActionLink(title, "Details", "Requests", new { id = Model.First().RequestID }, null)</h1>
+    </div>
+</div>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in Model)
+            {
+            <div class="blog-comment">
+                <hr />
+                @{ 
+                    var c = new Outa.Controllers.ProfilesController();
+                    var image = c.GetProfilePic(item.Author);
+                }
+                <ul class="comments" style="vertical-align:middle">
+                    <li class="clearfix" style="vertical-align:middle">
+                        <img src="@image" class="avatar" alt="">
+                        <div class="post-comments">
+                            <p class="meta">@Html.ActionLink(@Html.DisplayFor(modelItem => item.AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.Author }, null) | @Html.DisplayFor(model => item.Date) </p>
+                            <p style="font-size:large">
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row" style="text-align:center">
+    @if (User.Identity.GetUserId() != Model.Last().Author)
+    {
+        <div class="col-md-12">@Html.ActionLink("Reply", "Reply", new { parentId = Model.Last().Id }, new { @class = "btn btn-default" })</div>
+    }
+</div>
+
+
+

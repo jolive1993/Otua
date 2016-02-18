@@ -12,8 +12,12 @@
 <script>
 
     function changeContent() {
-        var myelement = document.getElementById("notiCount");
-        myelement.innerHTML = @Model.Offers.Count() + @Model.Messages.Count();
+        var count = @Model.Offers.Count() + @Model.Messages.Count();
+        if(count > 0)
+        {
+            var myelement = document.getElementById("notiCount");
+            myelement.innerHTML = count;
+        }
     }
     changeContent();
 </script>

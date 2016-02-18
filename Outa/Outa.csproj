@@ -249,6 +249,7 @@
     <Content Include="Content\img\car.ico" />
     <Content Include="Content\leaflet-routing-machine.css" />
     <Content Include="Content\leaflet.routing.icons.png" />
+    <Content Include="Content\message.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\remodal-default-theme.css" />
     <Content Include="Content\remodal.css" />
@@ -369,6 +370,8 @@
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Notifications\Notifications.cshtml" />
+    <Content Include="Views\Messages\Reply.cshtml" />
+    <Content Include="Views\Messages\Conversation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

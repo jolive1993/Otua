@@ -40,7 +40,29 @@ namespace Outa.Controllers
             {
                 return HttpNotFound();
             }
-            return View(message);
+            message = FindRoot(message.Id);
+            List<Message> children = FindChildren(message.Id);
+            if (children.Count() > 0)
+            {
+                children.Insert(0, message);
+                if (User.Identity.GetUserId() == children.Last().Recp)
+                {
+                    children.Last().Status = 1;
+                    db.Entry(children.Last()).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return View("Conversation", children);
+            }
+            else
+            {
+                if (User.Identity.GetUserId() == message.Recp)
+                {
+                    message.Status = 1;
+                    db.Entry(message).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return View(message);
+            }
         }
 
         // GET: Messages/Create
@@ -70,7 +92,40 @@ namespace Outa.Controllers
             {
                 db.Messages.Add(message);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyMessages");
+            }
+
+            return View(message);
+        }
+        public ActionResult Reply(int parentId)
+        {
+            TempData["parentId"] = parentId;
+            return View();
+        }
+
+        // POST: Messages/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply([Bind(Include = "Id,Content,Author,AuthorUn,Recp,RecpUn,Date,RequestID,Status,ParentID,Subject")] Message message)
+        {
+            int parentId = (int)TempData["parentId"];
+            Message Omessage = db.Messages.Find(parentId);
+            message.Author = User.Identity.GetUserId();
+            message.AuthorUn = User.Identity.GetUserName();
+            message.Recp = Omessage.Author;
+            message.RecpUn = Omessage.AuthorUn;
+            message.Date = DateTime.Now;
+            message.Status = 0;
+            message.ParentID = parentId;
+            message.RequestID = Omessage.RequestID;
+            message.Subject = Omessage.Subject;
+            if (ModelState.IsValid)
+            {
+                db.Messages.Add(message);
+                db.SaveChanges();
+                return RedirectToAction("MyMessages");
             }
 
             return View(message);
@@ -140,6 +195,46 @@ namespace Outa.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [NonAction]
+        public List<Message> FindChildren(int messageId)
+        {
+            List<Message> messages = new List<Message>();
+            int id = messageId;
+            while (true)
+            {
+                List<Message> message = db.Messages.Where(m => m.ParentID == id).ToList();
+                if (message.Count() > 0)
+                {
+                    messages.Add(message[0]);
+                    id = message[0].Id;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return messages;
+        }
+        [NonAction]
+        public Message FindRoot(int messageId)
+        {
+            int? parent;
+            Message message = db.Messages.Find(messageId);
+            parent = message.ParentID;
+            while (true)
+            {
+                if(parent != null)
+                {
+                    message = db.Messages.Find(parent);
+                    parent = message.ParentID;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return message;
         }
     }
 }

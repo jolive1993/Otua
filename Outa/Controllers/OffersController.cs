@@ -26,6 +26,16 @@ namespace Outa.Controllers
         public ActionResult IndexByParent(int id)
         {
             var list = db.Offers.Where(model => model.o_Parent == id).ToList();
+            foreach(Offer o in list)
+            {
+                Request r = db.Requests.Find(o.o_Parent);
+                if(User.Identity.GetUserId() == r.Author)
+                {
+                    o.ReadStatus = 1;
+                    db.Entry(o).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
             return View(list);
         }
         [Authorize]

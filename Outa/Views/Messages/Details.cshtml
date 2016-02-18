@@ -3,88 +3,36 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Message</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorUn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AuthorUn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Recp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Recp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RecpUn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RecpUn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RequestID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RequestID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ParentID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ParentID)
-        </dd>
-
-    </dl>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/message.css" />
+</head>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="blog-comment">
+                <hr />
+                @{ 
+                    var c = new Outa.Controllers.ProfilesController();
+                    var v = new Outa.Controllers.OffersController();
+                    var image = c.GetProfilePic(Model.Author);
+                    string title = v.getRequestTitle(Model.RequestID);
+                }
+                    <ul class="comments" style="vertical-align:middle">
+                        <li class="clearfix" style="vertical-align:middle">
+                            <img src="@image" class="avatar" alt="">
+                            <div class="post-comments">
+                                <p class="meta">@Html.ActionLink(@Html.DisplayFor(model => model.AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = Model.Author }, null) | @Html.ActionLink(title, "Details", "Requests", new { id = Model.RequestID }, null) | @Html.DisplayFor(model => model.Date) </p>
+                                <p style="font-size:large">
+                                    @Html.DisplayFor(model => model.Content)
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row" style="text-align:center">
+    <div class="col-md-12">@Html.ActionLink("Reply", "Reply", new { parentId = Model.Id }, new { @class = "btn btn-default" })</div>
+</div>
+
