@@ -198,6 +198,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\OffersController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
@@ -206,9 +208,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602171534209_InitialCreate.cs" />
+    <Compile Include="Migrations\201602171534209_InitialCreate.Designer.cs">
+      <DependentUpon>201602171534209_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602181709322_message.cs" />
+    <Compile Include="Migrations\201602181709322_message.Designer.cs">
+      <DependentUpon>201602181709322_message.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602181724292_message1.cs" />
+    <Compile Include="Migrations\201602181724292_message1.Designer.cs">
+      <DependentUpon>201602181724292_message1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602181912359_readstatus.cs" />
+    <Compile Include="Migrations\201602181912359_readstatus.Designer.cs">
+      <DependentUpon>201602181912359_readstatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Offer.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Request.cs" />
@@ -216,6 +236,7 @@
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\_Notification.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -342,6 +363,12 @@
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
     <Content Include="Views\Shared\_Reviews.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Notifications\Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +380,20 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201602171534209_InitialCreate.resx">
+      <DependentUpon>201602171534209_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602181709322_message.resx">
+      <DependentUpon>201602181709322_message.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602181724292_message1.resx">
+      <DependentUpon>201602181724292_message1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602181912359_readstatus.resx">
+      <DependentUpon>201602181912359_readstatus.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

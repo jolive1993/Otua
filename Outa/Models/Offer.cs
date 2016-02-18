@@ -27,5 +27,6 @@ namespace Outa.Models
         public int o_Parent { get; set; }
         [Display(Name = "Status")]
         public int o_Status { get; set; }
+        public int ReadStatus { get; set; }
     }
 }

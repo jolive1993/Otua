@@ -85,6 +85,7 @@ namespace Outa.Controllers
                 offer.o_Author = User.Identity.GetUserId();
                 offer.o_Date = DateTime.Now;
                 offer.o_Parent = (int)TempData["parent"];
+                offer.ReadStatus = 0;
                 db.Offers.Add(offer);
                 db.SaveChanges();
                 return RedirectToAction("MyOffers");

@@ -102,12 +102,15 @@ namespace Outa.Controllers
                 r.TrnsactionId = item.TrnsactionId;
                 reviewList.Add(r);
             }
-            decimal? rating = (reviewList.Sum(r => r.Rating) / reviewList.Count());
-            if (profile.Rating != rating)
+            if (reviewList.Count() > 0)
             {
-                profile.Rating = rating;
-                db.Entry(profile).State = EntityState.Modified;
-                db.SaveChanges();
+                decimal? rating = (reviewList.Sum(r => r.Rating) / reviewList.Count());
+                if (profile.Rating != rating)
+                {
+                    profile.Rating = rating;
+                    db.Entry(profile).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
             return PartialView("_Reviews", reviewList);
         }

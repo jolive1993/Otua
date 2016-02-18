@@ -1,0 +1,19 @@
+﻿@model Outa.ViewModels._Notification
+@foreach (var item in Model.Messages)
+{
+    <li>@Html.ActionLink(item.AuthorUn + ", " + item.Subject, "Details", "Messages", new { id = item.Id }, null)</li>
+}
+@foreach (var item in Model.Offers)
+{
+        var c = new Outa.Controllers.OffersController();
+        string title = c.getRequestTitle(item.o_Parent);
+    <li>@Html.ActionLink(title + ", " + item.o_Price, "IndexByParent", "Offers", new { id = item.o_Parent }, null)</li>
+}
+<script>
+
+    function changeContent() {
+        var myelement = document.getElementById("notiCount");
+        myelement.innerHTML = @Model.Offers.Count() + @Model.Messages.Count();
+    }
+    changeContent();
+</script>

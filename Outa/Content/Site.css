@@ -107,3 +107,8 @@ align-content:center;
 border: solid 1px;
 height: 120px;
 }
+.profile-pic
+{
+    max-height: 25%;
+    max-width:25%;
+}
