@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Outa.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Outa.Controllers
 {
@@ -161,6 +162,14 @@ namespace Outa.Controllers
                 db.Entry(offer).State = EntityState.Modified;
                 db.Entry(request).State = EntityState.Modified;
                 db.SaveChanges();
+                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                string phoneNumber = userManager.GetPhoneNumber(offer.o_Author);
+                if(phoneNumber != null)
+                {
+                    Request req = db.Requests.Find(offer.o_Parent);
+                    string message = string.Format("Your offer on {0} has been accepted", req.Title);
+                    userManager.SendSms(offer.o_Author, message);
+                }
                 return View(offer);
             }
             return View("Forbidden");

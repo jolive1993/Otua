@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Outa.Models;
+using Twilio;
 
 namespace Outa
 {
@@ -27,8 +28,14 @@ namespace Outa
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
+            var Twilio = new TwilioRestClient(
+               System.Configuration.ConfigurationManager.AppSettings["SMSAccountIdentification"],
+               System.Configuration.ConfigurationManager.AppSettings["SMSAccountPassword"]);
+            var result = Twilio.SendMessage(
+              System.Configuration.ConfigurationManager.AppSettings["SMSAccountFrom"],
+              message.Destination, message.Body
+            );
+             return Task.FromResult(0);
         }
     }
 

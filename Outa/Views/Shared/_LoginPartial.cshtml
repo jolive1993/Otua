@@ -11,6 +11,7 @@
                 @{ Html.RenderAction("Notifications", "Notifications", new { userId = User.Identity.GetUserId() }); }
                 <li role="separator" class="divider"></li>
                 <li>@Html.ActionLink("My Profile", "Details", "Profiles", null, null)</li>
+                <li>@Html.ActionLink("Manage Account", "Index", "Manage", null, null)</li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             </ul>
         </li>
