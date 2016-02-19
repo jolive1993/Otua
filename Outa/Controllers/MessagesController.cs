@@ -23,7 +23,7 @@ namespace Outa.Controllers
         public ActionResult MyMessages()
         {
             string userId = User.Identity.GetUserId();
-            List<Message> messages = db.Messages.Where(m => m.Recp == userId).ToList();
+            List<Message> messages = db.Messages.Where(m => m.Recp == userId && m.ParentID == null).ToList();
             messages.OrderBy(m => m.Date);
             return View("Index", messages);
         }

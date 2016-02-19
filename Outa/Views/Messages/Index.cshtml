@@ -12,19 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.Subject)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AuthorUn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Recp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RecpUn)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -32,43 +23,22 @@
         <th>
             @Html.DisplayNameFor(model => model.RequestID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ParentID)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
+            @Html.DisplayFor(modelItem => item.Subject)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AuthorUn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Recp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RecpUn)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.RequestID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ParentID)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

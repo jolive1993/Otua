@@ -144,7 +144,7 @@ namespace Outa.Controllers
                 profile.Rating = rating;
                 db.Profiles.Add(profile);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(profile);

@@ -63,10 +63,28 @@ namespace Outa.Controllers
                 list = db.Requests.Where(model => model.Status == 0).ToList();
             }
             ViewBag.CurrentFilter = searchString;
-            List<Request> sortedList = list.OrderBy(r => (Convert.ToDouble(r.Lat) - lat) + (Convert.ToDouble(r.Long) - longt)).ToList();
-            sortedList.Reverse();
+            SortedList<double, Request> sortedList = new SortedList<double, Models.Request>();
+            foreach(Request r in list)
+            {
+                double key;
+                double latdif;
+                double longdif;
+                latdif = Convert.ToDouble(r.Lat) - lat;
+                longdif = Convert.ToDouble(r.Long) - longt;
+                if(latdif < 0)
+                {
+                    latdif = latdif * (-1);
+                }
+                if(longdif < 0)
+                {
+                    longdif = longdif * (-1);
+                }
+                key = latdif + longdif;
+                sortedList.Add(key, r);
+            }
+            var finalList = sortedList.Values.ToList();
             var pageNumber = page ?? 1;
-            var onePage = sortedList.ToPagedList(pageNumber, 10);
+            var onePage = finalList.ToPagedList(pageNumber, 10);
             ViewBag.onePage = onePage;
             return View();
         }
