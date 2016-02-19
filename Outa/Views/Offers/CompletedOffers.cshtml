@@ -1,0 +1,57 @@
+﻿
+@model IEnumerable<Outa.Models.Offer>
+
+@{
+    ViewBag.Title = "CompletedOffers";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
+</head>
+
+<table id="myTable" class="tablesorter-metro-dark">
+    <thead>
+        <tr>
+            <th>
+                Request
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o_Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var c = new Outa.Controllers.OffersController();
+                        string title = c.getRequestTitle(item.o_Parent);
+                    }
+                    @Html.ActionLink(title, "Details", "Requests", new { id = item.o_Parent }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.o_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.o_Price)
+                </td>
+            </tr>
+                        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $("#myTable").tablesorter({
+            sortList: [[1, 1]]
+        });
+    }
+    );
+
+</script>
+

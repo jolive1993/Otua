@@ -57,7 +57,21 @@ namespace Outa.Controllers
             var userid = User.Identity.GetUserId();
             var list = db.Offers.Where(model => model.o_Author == userid).ToList();
             List<Offer> sortedList = list.OrderBy(o => o.o_Status).ToList();
+            sortedList.Reverse();
             return View(list);
+        }
+        public ActionResult CompletedOffers(string userid)
+        {
+            var list = db.Offers.Where(model => model.o_Author == userid && model.o_Status == 2).ToList();
+            var sortedList = list.OrderByDescending(i => i.o_Date).Take(10).ToList();
+            if(sortedList.Count > 0)
+            {
+                return PartialView(list);
+            }
+            else
+            {
+                return PartialView("Sad");
+            }
         }
 
         // GET: Offers/Details/5

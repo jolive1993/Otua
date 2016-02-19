@@ -10,11 +10,15 @@
 </head>
 <div class="col-md-12 profile-container">
     <div class="row" style="text-align:center">
-        <div class="col-md-12">
+        <div class="col-md-6">
         <h1>@Html.DisplayFor(model => model.UserName)</h1>
-            <h1 id="location"></h1>
-        <img class="profile-pic"src="@Html.DisplayFor(model => model.Img)" /></div>
-    </div>
+            <h2 style="color:#0ea7b5" id="location"></h2>
+        <img src="@Html.DisplayFor(model => model.Img)" /></div>
+        <div class="col-md-6">
+            <h1 style="padding-bottom:40px; padding-top:10px">Recent Completed Offers</h1>
+            @{ Html.RenderAction("CompletedOffers", "Offers", new { userid = Model.UserID });}
+        </div>
+        </div>
 <div class="row">
     <div class="col-md-12 detailsContent" style="text-align:center">
         @Html.DisplayFor(model => model.Description)

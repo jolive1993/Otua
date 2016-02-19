@@ -247,6 +247,7 @@
     <Content Include="Content\component.css" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\img\car.ico" />
+    <Content Include="Content\img\sadguy.png" />
     <Content Include="Content\leaflet-routing-machine.css" />
     <Content Include="Content\leaflet.routing.icons.png" />
     <Content Include="Content\message.css" />
@@ -372,6 +373,8 @@
     <Content Include="Views\Notifications\Notifications.cshtml" />
     <Content Include="Views\Messages\Reply.cshtml" />
     <Content Include="Views\Messages\Conversation.cshtml" />
+    <Content Include="Views\Offers\CompletedOffers.cshtml" />
+    <Content Include="Views\Shared\Sad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
