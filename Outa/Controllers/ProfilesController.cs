@@ -78,7 +78,7 @@ namespace Outa.Controllers
                     on Offer.Id
                     equals Transaction.OfferId
                     join Review in reviews
-                    on Transaction.OfferId
+                    on Transaction.Id
                     equals Review.TrnsactionId
                     where Offer.o_Author == id
                     select new

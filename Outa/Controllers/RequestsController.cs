@@ -79,8 +79,9 @@ namespace Outa.Controllers
                 {
                     longdif = longdif * (-1);
                 }
-                key = latdif + longdif;
+                key = latdif + longdif + (Convert.ToDouble(r.Id) / 10000);
                 sortedList.Add(key, r);
+
             }
             var finalList = sortedList.Values.ToList();
             var pageNumber = page ?? 1;
