@@ -112,3 +112,7 @@ height: 120px;
     max-height: 25%;
     max-width:25%;
 }
+.profile-container
+{
+    background-color:#f0fafb;
+}

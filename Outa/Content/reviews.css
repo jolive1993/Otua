@@ -20,6 +20,8 @@ a {
 }
 
 .blog-comment{
+    max-width:95%;
+    text-align:left;
 }
 
 .blog-comment ul{

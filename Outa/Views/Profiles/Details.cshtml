@@ -8,6 +8,7 @@
     <link href="~/Content/star-rating.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/star-rating.min.js"></script>
 </head>
+<div class="col-md-12 profile-container">
     <div class="row" style="text-align:center">
         <div class="col-md-12">
         <h1>@Html.DisplayFor(model => model.UserName)</h1>
@@ -25,10 +26,11 @@
         </div>
     </div>
 <div class="row">
-    <div class="col-md-12">
+    <div style="text-align:center">
         @{ Html.RenderAction("ReviewsForUser", new { id=Model.UserID }); }
     </div>
 </div>
+    </div>
 <script>
     function getAddress() {
         var geocoder = new google.maps.Geocoder();
