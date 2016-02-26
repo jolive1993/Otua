@@ -62,7 +62,7 @@ namespace Outa.Controllers
                 db.Reviews.Add(review);
                 db.Entry(request).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(review);
