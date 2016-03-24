@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/component.css"/>
     <link rel="stylesheet" type="text/css" href="~/Content/hover.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/animate.css" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-2.2.1.min.js"></script>
     <script src="~/Scripts/jquery.infinitescroll.min.js"></script>
     <script src="~/Scripts/masonry.pkgd.min.js"></script>
     <script src="~/Scripts/imagesloaded.pkgd.js"></script>
@@ -133,9 +133,7 @@
                 geocoder.geocode({ 'location': latlng }, function (results, status) {
 
                     if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results[0].formatted_address);
                         var address = (results[0].formatted_address).split(",");
-                        console.log(address);
                         $('#location').val(address[1]);
                         byAdress();
                     }
@@ -145,14 +143,11 @@
             {
                 var address;
                 var geocoder = new google.maps.Geocoder();
-                console.log($('#location').val());
                     address = ($('#location').val()).replace(" ", "");
                     geocoder.geocode({ 'address': address }, function (results, status) {
-                        console.log(status);
                         if (status == google.maps.GeocoderStatus.OK) {
                             var latitude = results[0].geometry.location.lat();
                             var longitude = results[0].geometry.location.lng();
-                            console.log(latitude);
                             $("#latlng").val(latitude + "," + longitude);
                         }
                     });
