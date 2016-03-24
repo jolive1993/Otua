@@ -24,5 +24,9 @@ namespace Outa
                 Console.WriteLine("{0} - {1}", full.Name.DisplayName, full.Email);
             }
         }
+        private void test()
+        {
+
+        }
     }
 }
