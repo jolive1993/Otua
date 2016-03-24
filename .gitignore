@@ -236,4 +236,4 @@ _Pvt_Extensions
 .fake/
 
 # Custom
-/DropBoxConfig.cs
+/ImageHostConfig.cs
