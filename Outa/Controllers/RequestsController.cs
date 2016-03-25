@@ -10,6 +10,8 @@ using Outa.Models;
 using Microsoft.AspNet.Identity;
 using PagedList.Mvc;
 using PagedList;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace Outa.Controllers
 {
