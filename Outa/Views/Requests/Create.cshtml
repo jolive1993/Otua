@@ -14,8 +14,9 @@
     <script src="//widget.cloudinary.com/global/all.js" type="text/javascript">
     </script>
 </head>
-<h2>New Request</h2>
-
+<div class="row" style="text-align: center">
+    <h2>New Request</h2>
+</div>
 
 @using (Html.BeginForm()) 
 {
@@ -100,9 +101,10 @@
             <p style="font-size:24px; font-style:italic; padding-top:10px; padding-bottom:10px">or</p>
             <input type="button" value="Use Current Location" style="width:25%" class="btn btn-default" onclick="geoLocation();" />
         </div>
+        <hr />
         <div class="form-group">
             <div class="col-md-12">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" style="width:35%" />
             </div>
         </div>
     </div>
@@ -186,9 +188,10 @@
         });
     };
     cloudinary.setCloudName('rockitshipshawty');
+    cloudinary.upl
     function widget()
     {
-      cloudinary.openUploadWidget({ upload_preset: 't4fsj7w1' },
+        cloudinary.openUploadWidget({ upload_preset: 't4fsj7w1', theme: 'minimal', sources: ['local', 'url'], max_files: 1, max_file_size: 2097152, button_class: 'btn btn-default' },
       function (error, result) {console.log(error, result)
       });
     };

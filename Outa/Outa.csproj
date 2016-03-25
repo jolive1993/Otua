@@ -283,7 +283,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\cloudinary_cors.html" />
     <Content Include="Content\component.css" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\img\car.ico" />
@@ -291,6 +290,7 @@
     <Content Include="Content\leaflet-routing-machine.css" />
     <Content Include="Content\leaflet.routing.icons.png" />
     <Content Include="Content\message.css" />
+    <Content Include="Content\minimal.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\remodal-default-theme.css" />
     <Content Include="Content\remodal.css" />
