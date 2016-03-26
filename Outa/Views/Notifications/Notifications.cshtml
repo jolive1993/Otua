@@ -16,7 +16,16 @@
         if(count > 0)
         {
             var myelement = document.getElementById("notiCount");
+            if(myelement.classList.contains("hide"))
+            {
+                myelement.classList.remove("hide");
+            }
             myelement.innerHTML = count;
+        }
+        else
+        {
+            var myelement = document.getElementById("notiCount");
+            myelement.classList.add("hide");
         }
     }
     changeContent();

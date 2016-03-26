@@ -11,90 +11,96 @@
 <h2>My Requests</h2>
 
 <body>
-    <table id="myTable" class="tablesorter-metro-dark">
-        <thead>
-        <tr class="dark-row">
-            <th onclick="animater()">
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tags)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                Offers
-            </th>
-            <th class="sorter-false"></th>
-        </tr>
-            </thead>
-        <tbody>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="myTable" class="tablesorter-metro-dark">
+                <thead>
+                    <tr class="dark-row">
+                        <th onclick="animater()">
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th class="sorter-false">
+                            Image
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tags)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>
+                            Offers
+                        </th>
+                        <th class="sorter-false"></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-        @foreach (var item in Model)
-        {
-            <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
-                <td style="vertical-align:middle">
-                    <div class="row">
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </div>
-                    <div class="row">
-                            <img class="table-image" src="@(item.Img)" />
-                    </div>
-                </td>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
+                            <td style="vertical-align:middle">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td style="vertical-align:middle; max-height:200px">
+                                <img class="table-image" src="@(item.Img)" />
+                            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tags)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @if (item.Status == 0)
-                    {
-                        @Html.Raw("Open")
-                    }
-                    else if (item.Status == 1)
-                    {
-                        @Html.Raw("Accepted Offer")
-                    }
-                    else if (item.Status == 2)
-                    {
-                        @Html.Raw("Closed")
-                    }
-                </td>
-                <td id="countoffers">
-                    @{
-                        var c = new Outa.Controllers.RequestsController();
-                        @c.getOfferCount(item.Id);
-                    }
-                </td>
-                <td>
-                    @if (item.Status == 0)
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                        @Html.Raw(" ")
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
-                        @Html.Raw(" ")
-                        @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tags)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @if (item.Status == 0)
+                                {
+                                    @Html.Raw("Open")
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    @Html.Raw("Accepted Offer")
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    @Html.Raw("Closed")
+                                }
+                            </td>
+                            <td id="countoffers">
+                                @{
+                                    var c = new Outa.Controllers.RequestsController();
+                                    @c.getOfferCount(item.Id);
+                                }
+                            </td>
+                            <td>
+                                @if (item.Status == 0)
+                                {
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                    @Html.Raw(" ")
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                    @Html.Raw(" ")
+                                    @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
 
-                    }
-                    else if (item.Status == 1)
-                    {
-                        @Html.ActionLink("Go to transactions", "Transactions", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    }
-                    else if (item.Status == 2)
-                    {
-                        @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    }
-                </td>
-            </tr>
-                        }
-</tbody>
-    </table>
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    @Html.ActionLink("Go to transactions", "Transactions", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                }
+                            </td>
+                        </tr>
+                                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </body>
 <script>
     $(document).ready(function () {

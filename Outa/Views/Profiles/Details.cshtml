@@ -13,7 +13,7 @@
         <div class="col-md-6">
         <h1>@Html.DisplayFor(model => model.UserName)</h1>
             <h2 style="color:#0ea7b5" id="location"></h2>
-        <img src="@Html.DisplayFor(model => model.Img)" /></div>
+        <img src="@Html.DisplayFor(model => model.Img)" style="max-width:100%" /></div>
         <div class="col-md-6">
             <h1 style="padding-bottom:40px; padding-top:10px">Recent Completed Offers</h1>
             @{ Html.RenderAction("CompletedOffers", "Offers", new { userid = Model.UserID });}

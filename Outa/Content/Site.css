@@ -43,6 +43,7 @@ textarea {
     justify-content: center;
     text-align: center;
     width: auto;
+    border:1px solid gray;
 }
 .requestcontent{
     text-align:center;
@@ -90,10 +91,26 @@ textarea {
 #grid-container{
     padding-top:170px;
 }
+@media screen and (max-width: 1000px) {
+    #grid-container{
+        padding-top:10px;
+    }
+}
 .table-image{
-    max-height:200px;
-    max-width:200px;
+    max-height:40%;
+    max-width:40%;
     padding: 1px;
+    float:left;
+    margin-left:20px;
+}
+@media screen and (max-width: 1000px) {
+.table-image{
+    max-height:100%;
+    max-width:100%;
+    padding: 1px;
+    float:left;
+    margin-left:20px;
+}
 }
 .clickable-row:hover
 {
@@ -119,4 +136,7 @@ height: 120px;
 .sad-guy
 {
     border:none !important;
+}
+.hide{
+    display:none;
 }

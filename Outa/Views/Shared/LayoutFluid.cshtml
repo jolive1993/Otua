@@ -1,47 +1,69 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link rel="SHORTCUT ICON" href="~/Content/img/car.ico" />
+    <link rel="stylesheet" href="~/Content/reset.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.1.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using Microsoft.AspNet.Identity
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Outa", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("All Requests", "GridIndex", "Requests")</li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("My Requests", "MyRequests", "Requests")</li>
-                                            <li>@Html.ActionLink("My Offers", "MyOffers", "Offers")</li>
-                                            <li>@Html.ActionLink("Messages", "MyMessages", "Messages", null, null)</li>
-                                            <li>@Html.ActionLink("Transactions", "Transactions", "Offers")</li>
-                                            <li>@Html.ActionLink("New Request", "Create", "Requests")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid body-content">
-        @RenderBody()
-    </div>
+    <header>
+        <div class="cd-logo"><a href="/home"><img src="~/Content/img/cd-logo.svg" alt="Logo"></a></div>
 
-    @Scripts.Render("~/bundles/jquery")
+        <nav class="cd-main-nav-wrapper">
+            <ul class="cd-main-nav">
+                <li>@Html.ActionLink("All Requests", "GridIndex", "Requests")</li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("My Requests", "MyRequests", "Requests")</li>
+                    <li>@Html.ActionLink("Transactions", "Transactions", "Offers")</li>
+                                            <li>@Html.ActionLink("New Request", "Create", "Requests")</li>
+                                            <li>@Html.ActionLink("Messages", "MyMessages", "Messages", null, null)</li>
+                                            <li>@Html.ActionLink("My Offers", "MyOffers", "Offers")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="#0" class="cd-subnav-trigger"><span>@User.Identity.GetUserName()</span><span class="badge" id="notiCount"></span></a>
+
+                        <ul>
+                            @{ Html.RenderAction("Notifications", "Notifications", new { userId = User.Identity.GetUserId() }); }
+                            <li class="go-back"><a href="#0">Menu</a></li>
+                            <li>@Html.ActionLink("My Profile", "Details", "Profiles", null, null)</li>
+                            <li>@Html.ActionLink("Manage Account", "Index", "Manage", null, null)</li>
+                            <li style="margin-right:50px">@Html.ActionLink("Log Off", "LogOff", "Account")</li>
+                            <li><a href="#0" class="placeholder">Placeholder</a></li>
+                        </ul>
+                    </li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                }
+            </ul> <!-- .cd-main-nav -->
+        </nav> <!-- .cd-main-nav-wrapper -->
+
+        <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+    </header>
+    <main class="cd-main-content">
+        <div class="container-fluid body-content">
+            @RenderBody()
+            <div style="padding-top:100px"></div>
+        </div>
+    </main>
+
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
