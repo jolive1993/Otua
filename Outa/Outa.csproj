@@ -288,6 +288,7 @@
     <Content Include="Content\img\sadguy.png" />
     <Content Include="Content\leaflet-routing-machine.css" />
     <Content Include="Content\leaflet.routing.icons.png" />
+    <Content Include="Content\responsive-table.css" />
     <Content Include="Scripts\main.js" />
     <Content Include="Content\message.css" />
     <Content Include="Content\minimal.css" />

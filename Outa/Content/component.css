@@ -1,5 +1,6 @@
 .grid {
-    margin: auto;
+      margin: 0 auto;
+      width:auto;
 }
 
 .grid li {
@@ -10,14 +11,13 @@
     max-width: 20%;
 	opacity: 0;
     text-align:center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 .grid-item{
 	float: none;
     padding: 20px;
-    width:20%;
-    max-width: 20%;
+    width:300px;
+    max-width: 300px;
     text-align:center;
     margin-left: auto;
     margin-right: auto;

@@ -83,6 +83,8 @@ textarea {
 .detailsImage
 {
     vertical-align:middle;
+    max-width:100%;
+    padding-bottom:10px;
 }
 .spacer{
     padding-top:30px;
@@ -90,6 +92,7 @@ textarea {
 }
 #grid-container{
     padding-top:170px;
+    margin: 0 auto;
 }
 @media screen and (max-width: 1000px) {
     #grid-container{
@@ -100,16 +103,12 @@ textarea {
     max-height:40%;
     max-width:40%;
     padding: 1px;
-    float:left;
-    margin-left:20px;
 }
 @media screen and (max-width: 1000px) {
 .table-image{
     max-height:100%;
     max-width:100%;
     padding: 1px;
-    float:left;
-    margin-left:20px;
 }
 }
 .clickable-row:hover
