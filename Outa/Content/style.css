@@ -478,7 +478,7 @@ header::before {
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  padding-top: 50px;
+  padding-top: 10px;
   background-color: #ffffff;
   -webkit-transition: -webkit-transform 0.3s;
   -moz-transition: -moz-transform 0.3s;
@@ -493,7 +493,7 @@ header::before {
 }
 @media only screen and (min-width: 1024px) {
   .cd-main-content {
-    padding-top: 80px;
+    padding-top: 40px;
   }
   .cd-main-content.nav-is-visible {
     -webkit-transform: translateX(0);

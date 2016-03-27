@@ -284,6 +284,7 @@
     <Content Include="Content\component.css" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\img\car.ico" />
+    <Content Include="Content\img\cd-logo.png" />
     <Content Include="Content\img\cd-logo.svg" />
     <Content Include="Content\img\sadguy.png" />
     <Content Include="Content\leaflet-routing-machine.css" />

@@ -4,14 +4,13 @@
     ViewBag.Title = "MyOffers";
 }
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
-    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
 </head>
 
 <h2>My Offers</h2>
-
-<table id="myTable" class="tablesorter-metro-dark">
+<div class="container">
+<table class="rwd-table">
     <thead>
         <tr>
             <th>
@@ -33,20 +32,20 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td data-th="Request">
                     @{
                         var c = new Outa.Controllers.OffersController();
                         string title = c.getRequestTitle(item.o_Parent);
                     }
                     @Html.ActionLink(title, "Details", "Requests", new { id = item.o_Parent }, null)
                 </td>
-                <td>
+                <td data-th="Date">
                     @Html.DisplayFor(modelItem => item.o_Date)
                 </td>
-                <td>
+                <td data-th="Price">
                     @Html.DisplayFor(modelItem => item.o_Price)
                 </td>
-                <td>
+                <td data-th="Status">
                     @if (item.o_Status == 0)
                 {
                         @Html.Raw("Open")
@@ -74,11 +73,5 @@
         }
     </tbody>
 </table>
-<script>
-    $(document).ready(function () {
-        $("#myTable").tablesorter();
-    }
-    );
-
-</script>
+    </div>
 

@@ -1621,6 +1621,7 @@ pre code {
   padding-right: 15px;
   text-align: center;
   align-content: center;
+  background: linear-gradient(#E7F7F9, #EC8C54);
 }
 .row {
   margin-left: -15px;

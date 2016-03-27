@@ -4,13 +4,12 @@
     ViewBag.Title = "Transactions";
 }
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
-    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
 </head>
 <h2>Transactions</h2>
 
-<table id="myTable" class="tablesorter-metro-dark">
+<table class="rwd-table">
     <thead>
     <tr>
         <th>
@@ -35,16 +34,16 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.o_AuthorUn)">
                 @Html.ActionLink(@Html.DisplayFor(modelItem => item.o_AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.o_Author }, null)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.o_Date)">
                 @Html.DisplayFor(modelItem => item.o_Date)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.o_Price)">
                 @Html.DisplayFor(modelItem => item.o_Price)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.o_Status)">
                 @if (item.o_Status == 1)
                 {
                     @Html.Raw("Awaiting Payment")
@@ -54,7 +53,7 @@
                     @Html.Raw("Payment received")
                 }
             </td>
-            <td>
+            <td data-th="Request">
                 @{
                     var c = new Outa.Controllers.OffersController();
                     string title = c.getRequestTitle(item.o_Parent);
@@ -82,10 +81,3 @@
         </tbody>
 
 </table>
-<script>
-    $(document).ready(function () {
-        $("#myTable").tablesorter();
-    }
-    );
-
-</script>

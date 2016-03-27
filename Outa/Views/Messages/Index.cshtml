@@ -4,12 +4,11 @@
     ViewBag.Title = "Index";
 }
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
-    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
 </head>
 <h2>Inbox</h2>
-<table id="myTable" class="tablesorter-metro-dark">
+<table class="rwd-table">
     <thead>
         <tr>
             <th>User</th>
@@ -27,25 +26,25 @@
         @foreach (var item in Model)
         {
             <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
-                <td>
+                <td data-th="User">
                     <div>@Html.DisplayFor(modelItem => item.AuthorUn)</div>
                     @{ 
                         var v = new Outa.Controllers.ProfilesController();
                         var image = v.GetProfilePic(item.Author);
                     }
-                    <img src="@image" class="profile-pic" alt="">
+                    <img src="@image" class="table-image" style="margin:0 auto"alt="">
                 </td>
-                <td>
+                <td data-th="@Html.DisplayNameFor(model => model.Subject)">
                     @Html.DisplayFor(modelItem => item.Subject)
                 </td>
-                <td>
+                <td data-th="Request">
                     @{
                         var c = new Outa.Controllers.OffersController();
                         string title = c.getRequestTitle(item.RequestID);
                     }
                     @Html.ActionLink(title, "Details", "Requests", new { id = item.RequestID }, null)
                 </td>
-                <td>
+                <td data-th="@Html.DisplayNameFor(model => model.Date)">
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
             </tr>
@@ -54,7 +53,6 @@
 </table>
 <script>
     $(document).ready(function () {
-        $("#myTable").tablesorter();
         $(".clickable-row").click(function () {
             window.document.location = $(this).data("href");
         });

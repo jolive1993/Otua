@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/jquery-2.2.1.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="~/Content/reset.css">
     <link rel="stylesheet" href="~/Content/style.css">
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
-    <script src="~/Scripts/jquery-2.2.1.min.js"></script>
     <script src="~/Scripts/main.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -18,7 +17,7 @@
 </head>
 <body>
     <header>
-        <div class="cd-logo"><a href="/home"><img src="~/Content/img/cd-logo.svg" alt="Logo"></a></div>
+        <div class="cd-logo"><a href="/home"><img src="~/Content/img/cd-logo.png" alt="Logo"></a></div>
 
         <nav class="cd-main-nav-wrapper">
             <ul class="cd-main-nav">
@@ -59,7 +58,6 @@
     <main class="cd-main-content">
         <div class="container body-content">
             @RenderBody()
-            <div style="padding-top:100px"></div>
         </div>
     </main>
 

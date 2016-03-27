@@ -10,6 +10,7 @@
 <h2>My Requests</h2>
 
 <body>
+    <div class="container">
     <table class="rwd-table">
         <tr>
             <th>
@@ -71,8 +72,6 @@
                 <td>
                     @if (item.Status == 0)
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                        @Html.Raw(" ")
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
                         @Html.Raw(" ")
                         @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
@@ -90,6 +89,7 @@
             </tr>
                         }
     </table>
+        </div>
 
 
 </body>

@@ -20,7 +20,7 @@
   padding-bottom: .5em;
 }
 .rwd-table td:before {
-  content: attr(data-th) ": ";
+  content: attr(data-th) "";
   font-weight: bold;
   width: 6.5em;
   display: inline-block;
@@ -58,17 +58,18 @@ body {
 h1 {
   font-weight: normal;
   letter-spacing: -1px;
-  color: #34495E;
+  color: #0ea7b5;
 }
 
 .rwd-table {
-  background: #0ea7b5;
+  background: #EC8C54;
   color: #fff;
   border-radius: .4em;
   overflow: hidden;
+  margin: 0 auto;
 }
 .rwd-table tr {
-  border-color: #46637f;
+  border-color: 	#ffbe4f;
 }
 .rwd-table th, .rwd-table td {
   margin: .5em 1em;
@@ -79,5 +80,5 @@ h1 {
   }
 }
 .rwd-table th, .rwd-table td:before {
-  color: #dd5;
+  color:black;
 }

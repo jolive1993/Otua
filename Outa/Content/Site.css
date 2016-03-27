@@ -43,7 +43,7 @@ textarea {
     justify-content: center;
     text-align: center;
     width: auto;
-    border:1px solid gray;
+    background-color:#ffffff;
 }
 .requestcontent{
     text-align:center;
