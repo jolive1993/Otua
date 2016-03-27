@@ -20,11 +20,11 @@
         <img src="@Html.DisplayFor(model => model.Img)" class="detailsImage" style="max-width:100%" />
     </div>
     <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" style="text-align:center">
         @if (Model.Status == 0)
         {
-            <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-default btn-large", @style = "width:100%" })</p>
-            <p>@Html.ActionLink("Ask Question", "Create", "Messages", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:100%" })</p>
+            <p class="topbutton">@Html.ActionLink("Make Offer", "Create", "Offers", new { id = Model.Id }, new { @class = "btn btn-default btn-large", @style = "width:90%" })</p>
+            <p>@Html.ActionLink("Ask Question", "Create", "Messages", new { id = Model.Id }, new { @class = "btn btn-primary btn-large", @style = "width:90%" })</p>
         }
         <div style="text-align:center">
             <h2 id="location"></h2>

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Manage";
 }
-
+@using Microsoft.AspNet.Identity
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
@@ -42,6 +42,10 @@
                 @Html.ActionLink("Add", "AddPhoneNumber")
             }
             ]
+        </dd>
+        <dt>Edit Profile:</dt>
+        <dd>
+            @Html.ActionLink("Edit", "Edit", "Profiles", new { uid = User.Identity.GetUserId() }, null)
         </dd>
         <dt>Two-Factor Authentication:</dt>
         <dd>

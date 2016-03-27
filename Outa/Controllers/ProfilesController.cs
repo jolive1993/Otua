@@ -151,8 +151,11 @@ namespace Outa.Controllers
         }
 
         // GET: Profiles/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string uid)
         {
+            int? id;
+            var profiles = db.Profiles.Where(model => model.UserID == uid).ToList();
+            id = profiles[0].Id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -170,13 +173,13 @@ namespace Outa.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserName,UserID,Lat,Long,Description,Rating")] Profile profile)
+        public ActionResult Edit([Bind(Include = "Id,UserName,UserID,Lat,Long,Description,Rating,Img")] Profile profile)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(profile).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("Details", profile);
             }
             return View(profile);
         }
