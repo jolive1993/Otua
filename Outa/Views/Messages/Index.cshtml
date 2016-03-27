@@ -7,56 +7,57 @@
     <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
 </head>
-<h2>Inbox</h2>
-<table class="rwd-table">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>Request</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
-            <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
-                <td data-th="User">
-                    <div>@Html.DisplayFor(modelItem => item.AuthorUn)</div>
-                    @{ 
-                        var v = new Outa.Controllers.ProfilesController();
-                        var image = v.GetProfilePic(item.Author);
-                    }
-                    <img src="@image" class="table-image" style="margin:0 auto"alt="">
-                </td>
-                <td data-th="@Html.DisplayNameFor(model => model.Subject)">
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td data-th="Request">
-                    @{
-                        var c = new Outa.Controllers.OffersController();
-                        string title = c.getRequestTitle(item.RequestID);
-                    }
-                    @Html.ActionLink(title, "Details", "Requests", new { id = item.RequestID }, null)
-                </td>
-                <td data-th="@Html.DisplayNameFor(model => model.Date)">
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
+<div class="container" style="padding-top:50px; padding-bottom:50px">
+    <table class="rwd-table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </th>
+                <th>Request</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
             </tr>
-                        }
-    </tbody>
-</table>
-<script>
-    $(document).ready(function () {
-        $(".clickable-row").click(function () {
-            window.document.location = $(this).data("href");
-        });
-    }
-    );
+        </thead>
+        <tbody>
 
-</script>
+            @foreach (var item in Model)
+            {
+                <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
+                    <td data-th="User">
+                        <div>@Html.DisplayFor(modelItem => item.AuthorUn)</div>
+                        @{
+                            var v = new Outa.Controllers.ProfilesController();
+                            var image = v.GetProfilePic(item.Author);
+                        }
+                        <img src="@image" class="table-image" style="margin:0 auto" alt="">
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.Subject)">
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td data-th="Request">
+                        @{
+                            var c = new Outa.Controllers.OffersController();
+                            string title = c.getRequestTitle(item.RequestID);
+                        }
+                        @Html.ActionLink(title, "Details", "Requests", new { id = item.RequestID }, null)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.Date)">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".clickable-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        }
+        );
+
+    </script>

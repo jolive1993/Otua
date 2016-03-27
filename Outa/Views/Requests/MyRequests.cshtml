@@ -7,89 +7,88 @@
     <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
 </head>
-<h2>My Requests</h2>
 
 <body>
-    <div class="container">
-    <table class="rwd-table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                Image
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tags)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                Offers
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
-                <td data-th="Title">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td style="vertical-align:middle; text-align:center">
-                    <img class="table-image" src="@(item.Img)" />
-                </td>
-
-                <td data-th="Tags">
-                    @Html.DisplayFor(modelItem => item.Tags)
-                </td>
-                <td data-th="Date">
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td data-th="Status">
-                    @if (item.Status == 0)
-                    {
-                        @Html.Raw("Open")
-                    }
-                    else if (item.Status == 1)
-                    {
-                        @Html.Raw("Accepted Offer")
-                    }
-                    else if (item.Status == 2)
-                    {
-                        @Html.Raw("Closed")
-                    }
-                </td>
-                <td data-th="# Offers" id="countoffers">
-                    @{
-                        var c = new Outa.Controllers.RequestsController();
-                        @c.getOfferCount(item.Id);
-                    }
-                </td>
-                <td>
-                    @if (item.Status == 0)
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
-                        @Html.Raw(" ")
-                        @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
-
-                    }
-                    else if (item.Status == 1)
-                    {
-                        @Html.ActionLink("Go to transactions", "Transactions", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    }
-                    else if (item.Status == 2)
-                    {
-                        @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    }
-                </td>
+    <div class="container" style="padding-top:50px; padding-bottom:50px">
+        <table class="rwd-table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tags)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    Offers
+                </th>
+                <th></th>
             </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })">
+                    <td data-th="Title">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td style="vertical-align:middle; text-align:center">
+                        <img class="table-image" src="@(item.Img)" />
+                    </td>
+
+                    <td data-th="Tags">
+                        @Html.DisplayFor(modelItem => item.Tags)
+                    </td>
+                    <td data-th="Date">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td data-th="Status">
+                        @if (item.Status == 0)
+                        {
+                            @Html.Raw("Open")
                         }
-    </table>
-        </div>
+                        else if (item.Status == 1)
+                        {
+                            @Html.Raw("Accepted Offer")
+                        }
+                        else if (item.Status == 2)
+                        {
+                            @Html.Raw("Closed")
+                        }
+                    </td>
+                    <td data-th="# Offers" id="countoffers">
+                        @{
+                            var c = new Outa.Controllers.RequestsController();
+                            @c.getOfferCount(item.Id);
+                        }
+                    </td>
+                    <td>
+                        @if (item.Status == 0)
+                        {
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
+                            @Html.Raw(" ")
+                            @Html.ActionLink("View Offers", "IndexByParent", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+                        }
+                        else if (item.Status == 1)
+                        {
+                            @Html.ActionLink("Go to transactions", "Transactions", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        }
+                        else if (item.Status == 2)
+                        {
+                            @Html.ActionLink("Review Seller", "Create", "Reviews", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        }
+                    </td>
+                </tr>
+                            }
+        </table>
+    </div>
 
 
 </body>

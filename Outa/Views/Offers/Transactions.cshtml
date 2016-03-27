@@ -7,77 +7,77 @@
     <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
 </head>
-<h2>Transactions</h2>
-
-<table class="rwd-table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.o_AuthorUn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Status)
-        </th>
-        <th>
-            Request
-        </th>
-    </tr>
+<div class="container" style="padding-top:50px; padding-bottom:50px">
+    <table class="rwd-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_AuthorUn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_Status)
+                </th>
+                <th>
+                    Request
+                </th>
+            </tr>
         </thead>
-    <tbody>
+        <tbody>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td data-th="@Html.DisplayNameFor(model => model.o_AuthorUn)">
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.o_AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.o_Author }, null)
-            </td>
-            <td data-th="@Html.DisplayNameFor(model => model.o_Date)">
-                @Html.DisplayFor(modelItem => item.o_Date)
-            </td>
-            <td data-th="@Html.DisplayNameFor(model => model.o_Price)">
-                @Html.DisplayFor(modelItem => item.o_Price)
-            </td>
-            <td data-th="@Html.DisplayNameFor(model => model.o_Status)">
-                @if (item.o_Status == 1)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_AuthorUn)">
+                        @Html.ActionLink(@Html.DisplayFor(modelItem => item.o_AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.o_Author }, null)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_Date)">
+                        @Html.DisplayFor(modelItem => item.o_Date)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_Price)">
+                        @Html.DisplayFor(modelItem => item.o_Price)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_Status)">
+                        @if (item.o_Status == 1)
                 {
-                    @Html.Raw("Awaiting Payment")
-                }
-                else if (item.o_Status == 2)
-                {
-                    @Html.Raw("Payment received")
-                }
-            </td>
-            <td data-th="Request">
-                @{
-                    var c = new Outa.Controllers.OffersController();
-                    string title = c.getRequestTitle(item.o_Parent);
-                }
-                @Html.ActionLink(title, "Details", "Requests", new { id = item.o_Parent })
-            </td>
+                            @Html.Raw("Awaiting Payment")
+                        }
+                        else if (item.o_Status == 2)
+                        {
+                            @Html.Raw("Payment received")
+                        }
+                    </td>
+                    <td data-th="Request">
+                        @{
+                            var c = new Outa.Controllers.OffersController();
+                            string title = c.getRequestTitle(item.o_Parent);
+                        }
+                        @Html.ActionLink(title, "Details", "Requests", new { id = item.o_Parent })
+                    </td>
 
-            <td>
-                @if ((User.Identity.Name == item.o_AuthorUn && item.o_Status == 0) || User.IsInRole("admin"))
+                    <td>
+                        @if ((User.Identity.Name == item.o_AuthorUn && item.o_Status == 0) || User.IsInRole("admin"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                    @Html.Raw("|")
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    @Html.Raw("|")
-                }
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
-                @if (item.o_Status == 1)
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            @Html.Raw("|")
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.Raw("|")
+                        }
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @if (item.o_Status == 1)
                 {
-                    @Html.Raw(" ")
-                    @Html.ActionLink("Pay Now", "Create", "Transactions", new { id = item.Id }, new { @class = "btn btn-primary" })
-                }
-            </td>
-        </tr>
-    }
+                            @Html.Raw(" ")
+                            @Html.ActionLink("Pay Now", "Create", "Transactions", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        }
+                    </td>
+                </tr>
+                            }
         </tbody>
 
-</table>
+    </table>
+</div>
