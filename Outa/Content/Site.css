@@ -83,8 +83,10 @@ textarea {
 .detailsImage
 {
     vertical-align:middle;
-    max-width:100%;
+    margin: 0px auto;
+    height:auto;
     padding-bottom:10px;
+    display:block;
 }
 .spacer{
     padding-top:30px;

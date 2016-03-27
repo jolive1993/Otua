@@ -63,8 +63,6 @@
                         @if (item.o_Status == 0)
                 {
                             @Html.Raw(" ")
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                            @Html.Raw(" ")
                             @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
                         }
                     </td>

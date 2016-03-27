@@ -4,74 +4,66 @@
     ViewBag.Title = "IndexByParent";
 }
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/tableTheme.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/responsive-table.css" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
-    <script src="~/Scripts/jquery.tablesorter.min.js"></script>
 </head>
 
-<h2>Offers</h2>
-
-<table id="myTable" class="tablesorter-metro-dark">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.o_AuthorUn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o_Status)
-        </th>
-    </tr>
+<div class="container" style="padding-top:50px; padding-bottom:50px">
+    <table class="rwd-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_AuthorUn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.o_Status)
+                </th>
+            </tr>
         </thead>
-    <tbody>
+        <tbody>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.o_AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.o_Author }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.o_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.o_Price)
-            </td>
-            <td>
-                @if (item.o_Status == 0)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_AuthorUn)">
+                        @Html.ActionLink(@Html.DisplayFor(modelItem => item.o_AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = item.o_Author }, null)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_Date)">
+                        @Html.DisplayFor(modelItem => item.o_Date)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_Price)">
+                        @Html.DisplayFor(modelItem => item.o_Price)
+                    </td>
+                    <td data-th="@Html.DisplayNameFor(model => model.o_Status)">
+                        @if (item.o_Status == 0)
                 {
-                    @Html.Raw("Open")
-                }
-                else if (item.o_Status == 1)
-                {
-                    @Html.Raw("Accepted Offer")
-                }
-                else if (item.o_Status == 2)
-                {
-                    @Html.Raw("Closed")
-                }
-            </td>
+                            @Html.Raw("Open")
+                        }
+                        else if (item.o_Status == 1)
+                        {
+                            @Html.Raw("Accepted Offer")
+                        }
+                        else if (item.o_Status == 2)
+                        {
+                            @Html.Raw("Closed")
+                        }
+                    </td>
 
-            <td>
-                @if (item.o_Status == 0)
+                    <td>
+                        @if (item.o_Status == 0)
                 {
-                    @Html.ActionLink("Accept", "Accept", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
-                }
-            </td>
-        </tr>
-    }
+                            @Html.ActionLink("Accept", "Accept", "Offers", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        }
+                    </td>
+                </tr>
+            }
         </tbody>
 
-</table>
-<script>
-    $(document).ready(function () {
-        $("#myTable").tablesorter();
-    }
-    );
-
-</script>
+    </table>
+    </div>
