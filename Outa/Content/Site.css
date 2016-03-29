@@ -1,6 +1,5 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -25,25 +24,29 @@ textarea {
 #indexjumbo
 {
     color:white;
-    text-shadow: 1px 1px #000000;
     text-align:center;
-    justify-content:center;
-    background-image:url(https://wallpaperscraft.com/image/bmw_325i_e30_white_auto_93276_1366x768.jpg);
-    height:750px;
     width:100%;
-    vertical-align:middle;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height:auto;
+  background: url(../Content/img/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.parent-container{
+
 }
 .jumbo-content{
+
 }
 .requesttable{
     height: auto;
     justify-content: center;
     text-align: center;
     width: auto;
-    background-color:#ffffff;
+    border-style: solid;
+    border-width: 2px;
+    border-color: 	#6bd2db;
 }
 .requestcontent{
     text-align:center;

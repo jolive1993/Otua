@@ -128,7 +128,7 @@ textarea {
   font: inherit;
   margin: 0;
   max-height:100%;
-  max-width:100%;
+  max-width:190%;
   width:100%;
   resize:vertical;
 }
@@ -1113,8 +1113,6 @@ a {
 }
 a:hover,
 a:focus {
-  color: #91170a;
-  text-decoration: underline;
 }
 a:focus {
   outline: thin dotted;
@@ -1622,6 +1620,14 @@ pre code {
   text-align: center;
   align-content: center;
   background: #ffffff;
+}
+.container-fluids {
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -200px;
 }
 .row {
   margin-left: -15px;
@@ -3772,8 +3778,8 @@ tbody.collapse.in {
 .btn-group-vertical > .btn-group > .btn {
   display: block;
   float: none;
-  width: 100%;
-  max-width: 100%;
+  width: 90%;
+  max-width: 90%;
 }
 .btn-group-vertical > .btn-group > .btn {
   float: none;
@@ -7117,4 +7123,22 @@ label {
 }
 .pager .disabled > a {
   border-color: #dddddd;
+}
+  ha{
+    font-size: 3rem;
+    margin: 0 0 1rem;
+
+    @media (max-width: $bp-s){
+      font-size: 2rem;
+    }
+  }
+  hb{
+    font-weight: 300;
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+
+    @media (max-width: $bp-s){
+      font-size: 1.5rem;
+    }
+  }
 }

@@ -283,6 +283,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\component.css" />
     <Content Include="Content\hover.css" />
+    <Content Include="Content\img\bg.jpg" />
     <Content Include="Content\img\car.ico" />
     <Content Include="Content\img\cd-logo.png" />
     <Content Include="Content\img\cd-logo.svg" />
@@ -438,6 +439,7 @@
     <Content Include="Views\Offers\CompletedOffers.cshtml" />
     <Content Include="Views\Shared\Sad.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Views\Shared\LayoutFluidHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

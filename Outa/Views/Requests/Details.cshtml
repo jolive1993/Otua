@@ -41,7 +41,7 @@
 <div class="row">
     <div class="col-md-6">
         <p class="detailsOtherH">User</p>
-        <p class="detailsOther">@Html.DisplayFor(model => model.AuthorUn)</p>
+        <p class="detailsOther"> @Html.ActionLink(@Html.DisplayFor(model => model.AuthorUn).ToString(), "DetailsByUserId", "Profiles", new { uid = Model.Author }, null) </p>
     </div>
     <div class="col-md-6">
         <p class="detailsOtherH">Last Modified</p>

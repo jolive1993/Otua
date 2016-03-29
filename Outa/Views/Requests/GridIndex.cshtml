@@ -116,6 +116,7 @@
                         $newElems.removeClass("animated zoomIn");
                     });
                 })
+                borderColor();
             });
 
             })();
@@ -156,7 +157,17 @@
             };
             $( document ).ready(function() {
                 getAddress();
+                borderColor();
             });
+            function borderColor()
+            {
+                var colors = ['#ffbe4f', '#6bd2db', '#0ea7b5', '#0c457d', '#e8702a'];
+                jQuery('.requesttable').each(function() {
+                    var currentElement = $(this);
+                    var random_color = colors[Math.floor(Math.random() * colors.length)];
+                    currentElement.css('border-color', random_color);
+                });
+            };
         </script>
 </body>
 </html>
