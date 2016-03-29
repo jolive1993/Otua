@@ -160,3 +160,8 @@ height: 120px;
   height: auto;
   z-index: -100;
 }
+@media screen and (max-device-width: 800px) {
+    #video-background {
+        display: none;
+    }
+}
