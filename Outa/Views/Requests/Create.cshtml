@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/Content/remodal.css">
     <link rel="stylesheet" href="~/Content/remodal-default-theme.css">
     <link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/tagme.css">
     <script src="~/Scripts/jquery-2.2.0.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="~/Scripts/sweetalert.min.js"></script>
@@ -34,15 +35,25 @@
         </div>
 
 
+        <div hidden class="form-group">
+            <div class="row" style="padding:15px">
+                @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control", @id = "finaltags" } })
+                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="row" style="padding:15px">
                 @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label" })
             </div>
             <div class="col-md-12">
-                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                <textarea class="tagarea"></textarea>
             </div>
         </div>
+
         <div hidden class="form-group">
             <div class="row" style="padding:15px">
                 @Html.LabelFor(model => model.Img, htmlAttributes: new { @class = "control-label"})
@@ -80,8 +91,11 @@
             </div>
         </div>
         <div class="form-group">
+                <div class="row" style="padding:15px">
+                    <label class="control-label">Image</label>
+                </div>
             <div class="row" style="padding:15px">
-                <label class="control-label">Image</label>
+                <img id="imgpreview" src="" alt="No Image Selected" />
             </div>
             <div class="col-md-12">
                 <input type="button" class="btn btn-default" style="width:40%" onclick="widget();" value="Upload" />
@@ -190,12 +204,101 @@
     cloudinary.upl
     function widget()
     {
-        cloudinary.openUploadWidget({ upload_preset: 't4fsj7w1', theme: 'minimal', sources: ['local', 'url'], max_files: 1, max_file_size: 2097152, button_class: 'btn btn-default' },
+        cloudinary.openUploadWidget({ upload_preset: 't4fsj7w1', theme: 'minimal', sources: ['local', 'url'], max_files: 1, max_file_size: 10485760, button_class: 'btn btn-default' },
       function (error, result) {console.log(error, result)
       });
     };
     $(document).on('cloudinarywidgetsuccess', function (e, data) {
-        $("#url").val(data[0].url);
+        var url = data[0].url;
+        $("#url").val(url);
+        document.getElementById("imgpreview").src = url;
     });
+    //var tagArea = '.tag-area';
+    var backSpace;
+    var close = '<a class="close"></a>';
+    var PreTags = "";
+
+    $('.tagarea').after('<ul class="tag-box"></ul>');
+
+    for (i = 0 ; i < PreTags.length; i++) {
+        $('.tag-box').append('<li class="tags">' + PreTags[i] + close + '</li>');
+    }
+
+    $('.tag-box').append('<li class="new-tag"><input class="input-tag" type="text"></li>');
+
+    // Taging 
+    $('.input-tag').bind("keydown", function (kp) {
+        var tag = $('.input-tag').val().trim();
+        $(".tags").removeClass("danger");
+        if (tag.length > 0) {
+            backSpace = 0;
+            if (kp.keyCode == 32) {
+                tag = '#' + tag + ' ';
+                $(".new-tag").before('<li class="tags">' + tag + close + '</li>');
+                $(this).val('');
+            }
+        }
+
+        else {
+            if (kp.keyCode == 8) {
+                $(".new-tag").prev().addClass("danger");
+                backSpace++;
+                if (backSpace == 2) {
+                    $(".new-tag").prev().remove();
+                    backSpace = 0;
+                }
+            }
+        }
+    });
+    //Delete tag
+    $(".tag-box").on("click", ".close", function () {
+        $(this).parent().remove();
+    });
+    $(".tag-box").click(function () {
+        $('.input-tag').focus();
+    });
+    // Edit
+    $('.tag-box').on("dblclick", ".tags", function (cl) {
+        var tags = $(this);
+        var tag = tags.text().trim();
+        $('.tags').removeClass('edit');
+        tags.addClass('edit');
+        tags.html('<input class="input-tag" value="' + tag + '" type="text">')
+        $(".new-tag").hide();
+        tags.find('.input-tag').focus();
+
+        tag = $(this).find('.input-tag').val();
+        $('.tags').dblclick(function () {
+            tags.html(tag + close);
+            $('.tags').removeClass('edit');
+            $(".new-tag").show();
+        });
+
+        tags.find('.input-tag').bind("keydown", function (edit) {
+            tag = $(this).val();
+            if (edit.keyCode == 13) {
+                $(".new-tag").show();
+                $('.input-tag').focus();
+                $('.tags').removeClass('edit');
+                if (tag.length > 0) {
+                    tags.html(tag + close);
+                }
+                else {
+                    tags.remove();
+                }
+            }
+        });
+    });
+    function updateTags() {
+        console.log('yolo');
+        $('#finaltags').text($('.tag-box').text());
+    };
+    $(".tag-box").change(function () {
+        var tags = $('.tags').text();
+        tags = tags.trim();
+        $('#finaltags').val(tags);
+    });
+
+
 
 </script>

@@ -144,3 +144,8 @@ height: 120px;
 .hide{
     display:none;
 }
+#imgpreview{
+    width:25%;
+    height:auto;
+    padding:15px;
+}
